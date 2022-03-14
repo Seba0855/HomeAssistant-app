@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">HomeAssistant</string>
+    <string name="get_temperature_URL">https://blynk.cloud/external/api/get?token=d-6DGP7qHZ3ILwCWh3PUJNnI8LScfhqs&amp;V0&amp;V1</string>
+    <string name="user_agent_name">HomeAssistant app</string>
+    <string name="temperature">Temperatura:</string>
+    <string name="humidity">Wilgotność:</string>
 </resources>
