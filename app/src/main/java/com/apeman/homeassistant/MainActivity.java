@@ -27,10 +27,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TextView temp = (TextView) findViewById(R.id.temperature);
-        TextView humi = (TextView) findViewById(R.id.humidity);
+        TextView temp = findViewById(R.id.temperature);
+        TextView humi = findViewById(R.id.humidity);
 
-        ActionMenuItemView refresh = (ActionMenuItemView) findViewById(R.id.refresh);
+        ActionMenuItemView refresh = findViewById(R.id.refresh);
 
         refresh.setOnClickListener(view -> {
             refresh.animate().rotation(360.0f).setDuration(200).start();
