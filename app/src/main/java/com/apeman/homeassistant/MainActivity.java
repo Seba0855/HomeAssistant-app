@@ -1,24 +1,22 @@
 package com.apeman.homeassistant;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.ActionMenuItemView;
 
 import android.os.Bundle;
 
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.Cache;
 import com.android.volley.Network;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,12 +30,11 @@ public class MainActivity extends AppCompatActivity {
         TextView temp = (TextView) findViewById(R.id.temperature);
         TextView humi = (TextView) findViewById(R.id.humidity);
 
-        Button refresh = (Button) findViewById(R.id.button);
-        refresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendRequest(temp, humi);
-            }
+        ActionMenuItemView refresh = (ActionMenuItemView) findViewById(R.id.refresh);
+
+        refresh.setOnClickListener(view -> {
+            refresh.animate().rotation(360.0f).setDuration(200).start();
+            sendRequest(temp, humi);
         });
 
     }
@@ -51,25 +48,17 @@ public class MainActivity extends AppCompatActivity {
         String url = getResources().getString(R.string.get_temperature_URL);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            temp.setText(jsonObject.getString("V0"));
-                            humi.setText(jsonObject.getString("V1"));
+                response -> { // onResponse
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        temp.setText(jsonObject.getString("V0"));
+                        humi.setText(jsonObject.getString("V1"));
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        temp.setText("404");
-                    }
-                }
+                volleyError -> temp.setText("error") // onErrorResponse
         );
 
         requestQueue.add(stringRequest);
