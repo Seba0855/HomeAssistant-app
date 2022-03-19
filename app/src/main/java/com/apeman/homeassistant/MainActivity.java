@@ -27,14 +27,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TextView temp = findViewById(R.id.temperature);
-        TextView humi = findViewById(R.id.humidity);
+//        TextView temp = findViewById(R.id.temperature);
+//        TextView humi = findViewById(R.id.humidity);
 
         ActionMenuItemView refresh = findViewById(R.id.refresh);
 
         refresh.setOnClickListener(view -> {
+            // it rotates only once, fix it
             refresh.animate().rotation(360.0f).setDuration(200).start();
-            sendRequest(temp, humi);
+//            sendRequest(temp, humi);
         });
 
     }
