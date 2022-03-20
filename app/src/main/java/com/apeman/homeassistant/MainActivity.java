@@ -6,6 +6,8 @@ import androidx.appcompat.view.menu.ActionMenuItemView;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         gridView = findViewById(R.id.cardsDeck);
+        gridView.setGravity(Gravity.CENTER);
         sendRequest();
 
         Log.i(TAG, "temperatura: " + temperatureValues.get("insideTemperature"));
