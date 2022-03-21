@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.cardsDeck);
 
-        RequestWizard requestWizard = new RequestWizard(this, temperatureValues);
-        requestWizard.sendRequest();
+        RequestWizard.getInstance(this.getApplicationContext()).getRequestQueue();
+        RequestWizard.getInstance(this).addToRequestQueue(sendRequest());
 
         Log.i(TAG, "temperatura: " + temperatureValues.get("insideTemperature"));
         Log.i(TAG, "wilgotność: " + temperatureValues.get("insideHumidity"));
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         refresh.setOnClickListener(view -> {
             // it rotates only once, fix it
             refresh.animate().rotation(360.0f).setDuration(200).start();
-            requestWizard.sendRequest();
+            RequestWizard.getInstance(this).addToRequestQueue(sendRequest());
             cardContentArrayList.get(0).setValue(temperatureValues.get("insideTemperature"));
             cardContentArrayList.get(1).setValue(temperatureValues.get("insideHumidity"));
             Log.i(TAG, "temperatura: " + temperatureValues.get("insideTemperature"));
@@ -90,21 +90,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void sendRequest() {
-        Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024);
-        Network network = new BasicNetwork(new HurlStack());
-        RequestQueue requestQueue = new RequestQueue(cache, network);
-        requestQueue.start();
-
+    public StringRequest sendRequest() {
         String uri = getResources().getString(R.string.get_temperature_URL);
 
-
-        Log.e(TAG, "PRÓBA UTWORZENIA STRING REQUESTA");
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
+        return new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                Log.d(TAG, "onResponse wywołane");
                 try {
+                    Log.d(TAG, "chce stworzyć json object");
                     JSONObject jsonObject = new JSONObject(response);
 
                     // Assigning those values by using loop would cause problems in the future
@@ -113,6 +107,10 @@ public class MainActivity extends AppCompatActivity {
                     temperatureValues.put("insideHumidity", jsonObject.getString("V1"));
                     Log.d(TAG, "V1: " + jsonObject.getString("V1"));
 
+//                        Log.i(TAG, "temperatura: " + temperatureValues.get("insideTemperature"));
+//                        Log.i(TAG, "wilgotność: " + temperatureValues.get("insideHumidity"));
+//                        Log.i(TAG, "klucze: " + temperatureValues.keySet());
+//                        Log.i(TAG, "wartosci: " + temperatureValues.values());
                 } catch (JSONException e) {
                     Log.e(TAG, "chuij nie wyszło");
                     e.printStackTrace();
@@ -124,6 +122,5 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(TAG, "wystąpił błąd: " + error);
             }
         });
-        requestQueue.add(stringRequest);
     }
 }
