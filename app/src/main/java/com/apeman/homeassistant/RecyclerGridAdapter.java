@@ -35,6 +35,7 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerGridAdapte
         // Setting the data to value indicator and description
         CardContent cardContent = cardContentArrayList.get(position);
         holder.valueIndicator.setText(cardContent.getValue());
+        holder.line.setBackgroundResource(cardContent.getLineColor());
         holder.description.setText(cardContent.getDescription());
     }
 
@@ -65,10 +66,12 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerGridAdapte
     public class RecyclerViewHolder extends RecyclerView.ViewHolder{
         private TextView valueIndicator;
         private TextView description;
+        private View line;
 
         RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             valueIndicator = itemView.findViewById(R.id.value_indicator);
+            line = itemView.findViewById(R.id.line);
             description = itemView.findViewById(R.id.name);
         }
     }

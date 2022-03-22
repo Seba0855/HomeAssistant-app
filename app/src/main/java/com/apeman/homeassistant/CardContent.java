@@ -3,9 +3,11 @@ package com.apeman.homeassistant;
 public class CardContent {
     private String value;
     private String description;
+    private int lineColor;
 
-    public CardContent(String value, String description) {
+    public CardContent(String value, int lineColor, String description) {
         this.value = value;
+        this.lineColor = lineColor;
         this.description = description;
     }
 
@@ -23,6 +25,14 @@ public class CardContent {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getLineColor() {
+        return lineColor;
+    }
+
+    public void setLineColor(int lineColor) {
+        this.lineColor = lineColor;
     }
 
 }

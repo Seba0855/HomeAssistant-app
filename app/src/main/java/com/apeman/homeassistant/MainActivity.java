@@ -55,10 +55,12 @@ public class MainActivity extends AppCompatActivity {
 
         cardContentArrayList.add(new CardContent(
                 temperatureValues.get("insideTemperature"),
+                R.color.orange,
                 "Czujnik temperatury wew."
         ));
         cardContentArrayList.add(new CardContent(
                 temperatureValues.get("insideHumidity"),
+                R.color.light_blue,
                 "Wilgotność"
         ));
 
@@ -102,9 +104,14 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
 
                     // Assigning those values by using loop would cause problems in the future
-                    temperatureValues.put("insideTemperature", jsonObject.getString("V0"));
+                    String tmp = jsonObject.getString("V0");
+                    tmp = tmp.substring(0, tmp.length() - 2) + "\u00B0";
+                    temperatureValues.put("insideTemperature", tmp);
                     Log.d(TAG, "V0: " + jsonObject.getString("V0"));
-                    temperatureValues.put("insideHumidity", jsonObject.getString("V1"));
+
+                    tmp = jsonObject.getString("V1");
+                    tmp = tmp.substring(0, tmp.length() - 2) + "%";
+                    temperatureValues.put("insideHumidity", tmp);
                     Log.d(TAG, "V1: " + jsonObject.getString("V1"));
 
 //                        Log.i(TAG, "temperatura: " + temperatureValues.get("insideTemperature"));
