@@ -1,14 +1,18 @@
 package com.apeman.homeassistant;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Canvas;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -44,26 +48,7 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerGridAdapte
         return cardContentArrayList.size();
     }
 
-    //    @NonNull
-//    @Override
-//    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-//        View listitemView = convertView;
-//        if (listitemView == null) {
-//            // Layout Inflater inflates each item to be displayed in Grid View
-//            listitemView = LayoutInflater.from(getContext()).inflate(R.layout.grid_item, parent, false);
-//        }
-//
-//        CardContent cardContent = getItem(position);
-//        TextView valueIndicator = listitemView.findViewById(R.id.value_indicator);
-//        TextView description = listitemView.findViewById(R.id.name);
-//
-//        valueIndicator.setText(cardContent.getValue());
-//        description.setText(cardContent.getDescription());
-//
-//        return listitemView;
-//    }
-
-    public class RecyclerViewHolder extends RecyclerView.ViewHolder{
+    public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         private TextView valueIndicator;
         private TextView description;
         private View line;
@@ -73,6 +58,28 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerGridAdapte
             valueIndicator = itemView.findViewById(R.id.value_indicator);
             line = itemView.findViewById(R.id.line);
             description = itemView.findViewById(R.id.name);
+        }
+    }
+
+
+    /**
+     * Supporting class for setting the spacing between cards
+     */
+    public static class VerticalSpaceItemDecoration extends RecyclerView.ItemDecoration {
+
+        private final int verticalSpaceHeight;
+        private final int horizontalSpaceWidth;
+
+        public VerticalSpaceItemDecoration(int verticalSpaceHeight, int horizontalSpaceWidth) {
+            this.verticalSpaceHeight = verticalSpaceHeight;
+            this.horizontalSpaceWidth = horizontalSpaceWidth;
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent,
+                                   RecyclerView.State state) {
+            outRect.right = horizontalSpaceWidth;
+            outRect.left = horizontalSpaceWidth;
         }
     }
 }

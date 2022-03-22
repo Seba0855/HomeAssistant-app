@@ -20,7 +20,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="25.3"
                 android:textColor="@color/dark_gray"
                 android:textSize="34sp"
                 app:layout_constraintBottom_toTopOf="@+id/name"
@@ -29,16 +28,23 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.808" />
 
-            <View
-                android:id="@+id/line"
+            <androidx.cardview.widget.CardView
+                app:cardCornerRadius="4dp"
                 android:layout_width="72dp"
                 android:layout_height="2dp"
                 android:layout_marginBottom="11dp"
-                android:background="@color/orange"
+                app:cardBackgroundColor="@color/orange"
                 app:layout_constraintBottom_toTopOf="@+id/name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/value_indicator" />
+                app:layout_constraintTop_toBottomOf="@+id/value_indicator" >
+
+                <View
+                    android:id="@+id/line"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/name"
@@ -46,7 +52,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center_horizontal"
                 android:layout_marginBottom="24dp"
-                android:text="dupa huj jebany"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -8,18 +8,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 
 import android.util.Log;
-import android.view.Gravity;
-import android.widget.GridView;
 
-import com.android.volley.Cache;
-import com.android.volley.Network;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.BasicNetwork;
-import com.android.volley.toolbox.DiskBasedCache;
-import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONException;
@@ -34,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<CardContent> cardContentArrayList;
 
     private static final String TAG = "MainActivity";
+    private static final int VERTICAL_ITEM_SPACE = 0;
+    private static final int HORIZONTAL_ITEM_SPACE = 16;
+
 
 
     @Override
@@ -70,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
 
         recyclerView.setLayoutManager(layoutManager);
+
+        recyclerView.addItemDecoration(new RecyclerGridAdapter.VerticalSpaceItemDecoration(VERTICAL_ITEM_SPACE, HORIZONTAL_ITEM_SPACE));
+
         recyclerView.setAdapter(adapter);
         Log.d(TAG, "Utworzył się view");
         //recyclerView.setForegroundGravity(Gravity.CENTER);
@@ -79,14 +77,18 @@ public class MainActivity extends AppCompatActivity {
         refresh.setOnClickListener(view -> {
             // it rotates only once, fix it
             refresh.animate().rotation(360.0f).setDuration(200).start();
+
             RequestWizard.getInstance(this).addToRequestQueue(sendRequest());
+
             cardContentArrayList.get(0).setValue(temperatureValues.get("insideTemperature"));
             cardContentArrayList.get(1).setValue(temperatureValues.get("insideHumidity"));
+
             Log.i(TAG, "temperatura: " + temperatureValues.get("insideTemperature"));
             Log.i(TAG, "wilgotność: " + temperatureValues.get("insideHumidity"));
             Log.i(TAG, "klucze: " + temperatureValues.keySet());
             Log.i(TAG, "wartosci: " + temperatureValues.values());
             Log.i(TAG, "temperatura z arraya: " + cardContentArrayList.get(0).getValue());
+
             adapter.notifyItemChanged(0);
             adapter.notifyItemChanged(1);
         });
