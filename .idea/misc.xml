@@ -6,9 +6,12 @@
         <entry key="..\:/HomeAssistant/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/HomeAssistant/app/src/main/res/layout/grid_item.xml" value="0.33" />
         <entry key="..\:/HomeAssistant/app/src/main/res/menu/top_app_bar.xml" value="0.36666666666666664" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.14719202898550723" />
+        <entry key="app/src/main/res/layout/grid_item.xml" value="0.836578369140625" />
       </map>
     </option>
   </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

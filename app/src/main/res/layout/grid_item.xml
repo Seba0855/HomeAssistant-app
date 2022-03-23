@@ -16,6 +16,18 @@
             android:gravity="center">
 
             <TextView
+                android:id="@+id/roomIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/value_indicator"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.192"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.444" />
+
+            <TextView
                 android:id="@+id/value_indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

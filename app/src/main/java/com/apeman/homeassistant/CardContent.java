@@ -1,11 +1,13 @@
 package com.apeman.homeassistant;
 
 public class CardContent {
+    private String roomIndicator;
     private String value;
     private String description;
     private int lineColor;
 
-    public CardContent(String value, int lineColor, String description) {
+    public CardContent(String roomIndicator, String value, int lineColor, String description) {
+        this.roomIndicator = roomIndicator;
         this.value = value;
         this.lineColor = lineColor;
         this.description = description;
@@ -35,4 +37,11 @@ public class CardContent {
         this.lineColor = lineColor;
     }
 
+    public String getRoomIndicator() {
+        return roomIndicator;
+    }
+
+    public void setRoomIndicator(String roomIndicator) {
+        this.roomIndicator = roomIndicator;
+    }
 }

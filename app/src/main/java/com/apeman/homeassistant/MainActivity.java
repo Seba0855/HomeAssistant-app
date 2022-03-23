@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -49,11 +50,13 @@ public class MainActivity extends AppCompatActivity {
         cardContentArrayList = new ArrayList<>();
 
         cardContentArrayList.add(new CardContent(
+                "Salon",
                 temperatureValues.get("insideTemperature"),
                 R.color.orange,
                 "Czujnik temperatury wew."
         ));
         cardContentArrayList.add(new CardContent(
+                "Dom",
                 temperatureValues.get("insideHumidity"),
                 R.color.light_blue,
                 "Wilgotność"
