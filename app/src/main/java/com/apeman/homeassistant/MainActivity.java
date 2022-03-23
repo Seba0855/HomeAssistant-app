@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     private static final int HORIZONTAL_ITEM_SPACE = 16;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
 //                        Log.i(TAG, "klucze: " + temperatureValues.keySet());
 //                        Log.i(TAG, "wartosci: " + temperatureValues.values());
                 } catch (JSONException e) {
-                    Log.e(TAG, "chuij nie wyszło");
+                    Log.e(TAG, "wystąpił błąd przy tworzeniu json object");
                     e.printStackTrace();
                 }
             }

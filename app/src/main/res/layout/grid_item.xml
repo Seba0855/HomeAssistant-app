@@ -15,6 +15,7 @@
             android:orientation="vertical"
             android:gravity="center">
 
+            <!-- Room indicator in top left corner-->
             <TextView
                 android:id="@+id/roomIndicator"
                 android:layout_width="wrap_content"
@@ -27,6 +28,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.444" />
 
+            <!-- Value indicator -->
             <TextView
                 android:id="@+id/value_indicator"
                 android:layout_width="wrap_content"
@@ -40,6 +42,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.808" />
 
+            <!-- CardView was used to soften line edges -->
             <androidx.cardview.widget.CardView
                 app:cardCornerRadius="4dp"
                 android:layout_width="72dp"
@@ -51,6 +54,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/value_indicator" >
 
+                <!-- Used to change the line color -->
                 <View
                     android:id="@+id/line"
                     android:layout_width="match_parent"
@@ -58,6 +62,7 @@
 
             </androidx.cardview.widget.CardView>
 
+            <!-- Card description  -->
             <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"

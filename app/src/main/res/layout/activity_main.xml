@@ -9,6 +9,7 @@
     android:layout_centerInParent="true"
     android:orientation="vertical">
 
+    <!-- Top app bar -->
     <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -26,6 +27,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!-- App content -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cardsDeck"
         android:layout_width="wrap_content"
