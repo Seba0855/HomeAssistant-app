@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -46,12 +47,13 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.cardsDeck);
         topAppBar = new MaterialToolbar(findViewById(R.id.topAppBar).getContext());
 
+        Log.d(TAG, "Invoking getData() before recyclerView has been created");
         getData();
 
-        Log.i(TAG, "temperatura: " + temperatureValues.get("insideTemperature"));
-        Log.i(TAG, "wilgotność: " + temperatureValues.get("insideHumidity"));
-        Log.i(TAG, "klucze: " + temperatureValues.keySet());
-        Log.i(TAG, "wartosci: " + temperatureValues.values());
+        Log.i(TAG, "temperature: " + temperatureValues.get("insideTemperature"));
+        Log.i(TAG, "humidity: " + temperatureValues.get("insideHumidity"));
+        Log.i(TAG, "hashmap keys: " + temperatureValues.keySet());
+        Log.i(TAG, "hashmap values: " + temperatureValues.values());
 
         // Create new ArrayList to store card objects
         cardContentArrayList = new ArrayList<>();
@@ -77,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new RecyclerGridAdapter.VerticalSpaceItemDecoration(VERTICAL_ITEM_SPACE, HORIZONTAL_ITEM_SPACE));
 
         recyclerView.setAdapter(adapter);
-        Log.d(TAG, "Utworzył się view");
+        Log.d(TAG, "recyclerView created");
         //recyclerView.setForegroundGravity(Gravity.CENTER);
 
 
@@ -86,16 +88,17 @@ public class MainActivity extends AppCompatActivity {
             // it rotates only once, fix it
             refresh.animate().rotation(360.0f).setDuration(200).start();
 
+            Log.d(TAG, "Refresh button clicked");
             getData();
 
             cardContentArrayList.get(0).setValue(temperatureValues.get("insideTemperature"));
             cardContentArrayList.get(1).setValue(temperatureValues.get("insideHumidity"));
 
-            //Log.i(TAG, "temperatura: " + temperatureValues.get("insideTemperature"));
-            //Log.i(TAG, "wilgotność: " + temperatureValues.get("insideHumidity"));
-            Log.i(TAG, "klucze: " + temperatureValues.keySet());
-            Log.i(TAG, "wartosci: " + temperatureValues.values());
-            Log.i(TAG, "temperatura z arraya: " + cardContentArrayList.get(0).getValue());
+            Log.i(TAG, "temperature: " + temperatureValues.get("insideTemperature"));
+            Log.i(TAG, "humidity: " + temperatureValues.get("insideHumidity"));
+            Log.i(TAG, "hashmap keys: " + temperatureValues.keySet());
+            Log.i(TAG, "hashmap values: " + temperatureValues.values());
+            Log.i(TAG, "arraylist get(): " + cardContentArrayList.get(0).getValue());
 
             adapter.notifyItemChanged(0);
             adapter.notifyItemChanged(1);
@@ -113,70 +116,45 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(new Observer<BlynkData>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        Log.d(TAG, "onSubscribe()");
+                        Log.d(TAG, "onSubscribe() invoked");
 
                     }
 
                     @Override
                     public void onNext(@NonNull BlynkData blynkData) {
-                        Log.d(TAG, "onNext()");
-                        Log.d(TAG, "Temperature: " + blynkData.getTemperature());
-                        Log.d(TAG, "Humidity: " + blynkData.getHumidity());
-                        temperatureValues.put("insideTemperature", blynkData.getTemperature());
-                        temperatureValues.put("insideHumidity", blynkData.getHumidity());
+                        Log.d(TAG, "onNext() invoked");
+                        String temperature = blynkData.getTemperature();
+                        String humidity = blynkData.getHumidity();
+
+                        Log.d(TAG, "BlynkData temperature: " + temperature);
+                        Log.d(TAG, "BlynkData humidity: " + humidity);
+                        temperatureValues.put("insideTemperature",
+                                temperature.substring(0, 4) + "\u00B0"
+                        );
+                        temperatureValues.put("insideHumidity",
+                                humidity.substring(0, 4) + "%"
+                        );
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.d(TAG, "onError()");
+                        Log.e(TAG, "onError()");
                         e.printStackTrace();
+                        if (temperatureValues.get("insideTemperature") == null
+                                && temperatureValues.get("insideHumidity") == null) {
+                            temperatureValues.put("insideTemperature", "--.-" + "\u00B0");
+                            temperatureValues.put("insideHumidity", "--.-%");
+                        }
                     }
 
                     @Override
                     public void onComplete() {
                         Log.d(TAG, "onComplete()");
+                        cardContentArrayList.get(0).setValue(temperatureValues.get("insideTemperature"));
+                        cardContentArrayList.get(1).setValue(temperatureValues.get("insideHumidity"));
+                        adapter.notifyItemChanged(0);
+                        adapter.notifyItemChanged(1);
                     }
                 });
     }
-
-
-    //    public StringRequest sendRequest() {
-//        String uri = getResources().getString(R.string.get_temperature_URL);
-//
-//        return new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                Log.d(TAG, "onResponse wywołane");
-//                try {
-//                    Log.d(TAG, "chce stworzyć json object");
-//                    JSONObject jsonObject = new JSONObject(response);
-//
-//                    // Assigning those values by using loop would cause problems in the future
-//                    String tmp = jsonObject.getString("V0");
-//                    tmp = tmp.substring(0, tmp.length() - 2) + "\u00B0";
-//                    temperatureValues.put("insideTemperature", tmp);
-//                    Log.d(TAG, "V0: " + jsonObject.getString("V0"));
-//
-//                    tmp = jsonObject.getString("V1");
-//                    tmp = tmp.substring(0, tmp.length() - 2) + "%";
-//                    temperatureValues.put("insideHumidity", tmp);
-//                    Log.d(TAG, "V1: " + jsonObject.getString("V1"));
-//
-////                        Log.i(TAG, "temperatura: " + temperatureValues.get("insideTemperature"));
-////                        Log.i(TAG, "wilgotność: " + temperatureValues.get("insideHumidity"));
-////                        Log.i(TAG, "klucze: " + temperatureValues.keySet());
-////                        Log.i(TAG, "wartosci: " + temperatureValues.values());
-//                } catch (JSONException e) {
-//                    Log.e(TAG, "wystąpił błąd przy tworzeniu json object");
-//                    e.printStackTrace();
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Log.e(TAG, "wystąpił błąd: " + error);
-//                topAppBar.setTitle("Bridge • Connection error");
-//            }
-//        });
-//    }
 }
