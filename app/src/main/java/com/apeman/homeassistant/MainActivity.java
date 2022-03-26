@@ -1,31 +1,24 @@
 package com.apeman.homeassistant;
 
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.ActionMenuItemView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-
-import android.os.Looper;
-import android.util.Log;
-import android.widget.Toast;
-
 import com.google.android.material.appbar.MaterialToolbar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     HashMap<String, String> temperatureValues = new HashMap<>();
@@ -36,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerGridAdapter adapter;
 
     private static final String TAG = "MainActivity";
+    private static final String IN_TEMP = "insideTemperature";
+    private static final String IN_HUM = "insideHumidity";
+
     private static final int VERTICAL_ITEM_SPACE = 0;
     private static final int HORIZONTAL_ITEM_SPACE = 16;
 
@@ -50,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "Invoking getData() before recyclerView has been created");
         getData();
 
-        Log.i(TAG, "temperature: " + temperatureValues.get("insideTemperature"));
-        Log.i(TAG, "humidity: " + temperatureValues.get("insideHumidity"));
+        Log.i(TAG, "temperature: " + temperatureValues.get(IN_TEMP));
+        Log.i(TAG, "humidity: " + temperatureValues.get(IN_HUM));
         Log.i(TAG, "hashmap keys: " + temperatureValues.keySet());
         Log.i(TAG, "hashmap values: " + temperatureValues.values());
 
@@ -60,13 +56,13 @@ public class MainActivity extends AppCompatActivity {
 
         cardContentArrayList.add(new CardContent(
                 "Salon",
-                temperatureValues.get("insideTemperature"),
+                temperatureValues.get(IN_TEMP),
                 R.color.orange,
                 "Czujnik temperatury wew."
         ));
         cardContentArrayList.add(new CardContent(
                 "Dom",
-                temperatureValues.get("insideHumidity"),
+                temperatureValues.get(IN_HUM),
                 R.color.light_blue,
                 "Wilgotność"
         ));
@@ -76,41 +72,29 @@ public class MainActivity extends AppCompatActivity {
         // Setting grid layout manager to implement grid view, displaying 2 columns
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.addItemDecoration(new RecyclerGridAdapter.VerticalSpaceItemDecoration(VERTICAL_ITEM_SPACE, HORIZONTAL_ITEM_SPACE));
+        recyclerView.addItemDecoration(
+                new RecyclerGridAdapter.VerticalSpaceItemDecoration(
+                        VERTICAL_ITEM_SPACE,
+                        HORIZONTAL_ITEM_SPACE)
+        );
 
         recyclerView.setAdapter(adapter);
         Log.d(TAG, "recyclerView created");
-        //recyclerView.setForegroundGravity(Gravity.CENTER);
-
 
         ActionMenuItemView refresh = findViewById(R.id.refresh);
         refresh.setOnClickListener(view -> {
             // it rotates only once, fix it
             refresh.animate().rotation(360.0f).setDuration(200).start();
-
-            Log.d(TAG, "Refresh button clicked");
             getData();
-
-            cardContentArrayList.get(0).setValue(temperatureValues.get("insideTemperature"));
-            cardContentArrayList.get(1).setValue(temperatureValues.get("insideHumidity"));
-
-            Log.i(TAG, "temperature: " + temperatureValues.get("insideTemperature"));
-            Log.i(TAG, "humidity: " + temperatureValues.get("insideHumidity"));
-            Log.i(TAG, "hashmap keys: " + temperatureValues.keySet());
-            Log.i(TAG, "hashmap values: " + temperatureValues.values());
-            Log.i(TAG, "arraylist get(): " + cardContentArrayList.get(0).getValue());
-
-            adapter.notifyItemChanged(0);
-            adapter.notifyItemChanged(1);
         });
     }
 
 
     private void getData() {
-        //String token = getResources().getString(R.string.blynk_token);
+        String token = getResources().getString(R.string.blynk_token);
 
         BlynkClient.getInstance()
-                .retrieveData()
+                .retrieveData(token)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BlynkData>() {
@@ -128,10 +112,10 @@ public class MainActivity extends AppCompatActivity {
 
                         Log.d(TAG, "BlynkData temperature: " + temperature);
                         Log.d(TAG, "BlynkData humidity: " + humidity);
-                        temperatureValues.put("insideTemperature",
+                        temperatureValues.put(IN_TEMP,
                                 temperature.substring(0, 4) + "\u00B0"
                         );
-                        temperatureValues.put("insideHumidity",
+                        temperatureValues.put(IN_HUM,
                                 humidity.substring(0, 4) + "%"
                         );
                     }
@@ -140,18 +124,32 @@ public class MainActivity extends AppCompatActivity {
                     public void onError(@NonNull Throwable e) {
                         Log.e(TAG, "onError()");
                         e.printStackTrace();
-                        if (temperatureValues.get("insideTemperature") == null
-                                && temperatureValues.get("insideHumidity") == null) {
-                            temperatureValues.put("insideTemperature", "--.-" + "\u00B0");
-                            temperatureValues.put("insideHumidity", "--.-%");
+                        Log.i(TAG, "temperature: " + temperatureValues.get(IN_TEMP));
+                        Log.i(TAG, "humidity: " + temperatureValues.get(IN_HUM));
+                        Log.i(TAG, "hashmap keys: " + temperatureValues.keySet());
+                        Log.i(TAG, "hashmap values: " + temperatureValues.values());
+
+                        if (temperatureValues.get(IN_TEMP) == null
+                                && temperatureValues.get(IN_HUM) == null) {
+
+                            temperatureValues.put(IN_TEMP, "--.-" + "\u00B0");
+                            temperatureValues.put(IN_HUM, "--.-%");
+
+                            cardContentArrayList.get(0).setValue(temperatureValues.get(IN_TEMP));
+                            cardContentArrayList.get(1).setValue(temperatureValues.get(IN_HUM));
+
+                            adapter.notifyItemChanged(0);
+                            adapter.notifyItemChanged(1);
                         }
+
+                        Toast.makeText(getApplicationContext(), "dupa", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onComplete() {
                         Log.d(TAG, "onComplete()");
-                        cardContentArrayList.get(0).setValue(temperatureValues.get("insideTemperature"));
-                        cardContentArrayList.get(1).setValue(temperatureValues.get("insideHumidity"));
+                        cardContentArrayList.get(0).setValue(temperatureValues.get(IN_TEMP));
+                        cardContentArrayList.get(1).setValue(temperatureValues.get(IN_HUM));
                         adapter.notifyItemChanged(0);
                         adapter.notifyItemChanged(1);
                     }

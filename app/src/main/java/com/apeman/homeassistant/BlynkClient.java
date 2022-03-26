@@ -1,16 +1,17 @@
 package com.apeman.homeassistant;
 
+import androidx.annotation.NonNull;
+
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.Retrofit;
-
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BlynkClient {
-    private static final String BLYNK_CLOUD_URL = "https://blynk.cloud/";
+    private static final String BLYNK_CLOUD_URL = "https://blynk.cloud/external/api/";
 
     private static BlynkClient instance;
-    private BlynkService blynkService;
+    private final BlynkService blynkService;
 
     private BlynkClient() {
 
@@ -30,7 +31,7 @@ public class BlynkClient {
         return instance;
     }
 
-    public Observable<BlynkData> retrieveData() {
-        return blynkService.retrieveData();
+    public Observable<BlynkData> retrieveData(@NonNull String token) {
+        return blynkService.retrieveData(token, "", "");
     }
 }
