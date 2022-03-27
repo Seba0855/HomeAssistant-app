@@ -7,11 +7,11 @@ public class BlynkData {
 
     @SerializedName("V0")
     @Expose
-    private String temperature;
+    private final String temperature;
 
     @SerializedName("V1")
     @Expose
-    private String humidity;
+    private final String humidity;
 
     public BlynkData(String temperature, String humidity) {
         this.temperature = temperature;

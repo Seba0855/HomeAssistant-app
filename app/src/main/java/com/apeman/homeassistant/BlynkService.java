@@ -12,7 +12,7 @@ public interface BlynkService {
      * @param token Blynk.cloud token
      * @param a as "V0" does not take any parameters, it should be always null
      * @param b as "V1" does not take any parameters, it should be always null
-     * @return Observable\<BlynkData>
+     * @return Observable<BlynkData>
      */
     @GET("get")
     Observable<BlynkData> retrieveData(

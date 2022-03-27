@@ -1,11 +1,18 @@
 <resources>
-    <string name="app_name">HomeAssistant</string>
-    <string name="appbar_title">Bridge • Connected</string>
-    <string name="blynk_token">d-6DGP7qHZ3ILwCWh3PUJNnI8LScfhqs</string>
-    <string name="get_temperature_URL">https://blynk.cloud/external/api/get?token=d-6DGP7qHZ3ILwCWh3PUJNnI8LScfhqs&amp;V0&amp;V1</string>
+<!--    Application settings-->
+    <string name="app_name">Home Assistant</string>
     <string name="user_agent_name">HomeAssistant app</string>
-    <string name="temperature">Temperatura:</string>
-    <string name="humidity">Wilgotność:</string>
+
+<!--    Tokens-->
+    <string name="blynk_token">d-6DGP7qHZ3ILwCWh3PUJNnI8LScfhqs</string>
+
+<!--    Application content-->
+    <string name="appbar_title">Bridge • Connected</string>
     <string name="refresh">Odśwież</string>
     <string name="refresh_desc">Kliknij by odświeżyć dane</string>
+
+<!--    Bottom navigation menu-->
+    <string name="page_1">Pulpit</string>
+    <string name="page_2">Wykresy</string>
+    <string name="page_3">Ustawienia</string>
 </resources>

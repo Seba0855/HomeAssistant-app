@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.cardsDeck);
         topAppBar = new MaterialToolbar(findViewById(R.id.topAppBar).getContext());
+        setSupportActionBar(topAppBar);
+
 
         Log.d(TAG, "Invoking getData() before recyclerView has been created");
         getData();
