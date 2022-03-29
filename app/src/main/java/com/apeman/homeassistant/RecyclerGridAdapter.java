@@ -44,11 +44,11 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerGridAdapte
         return cardContentArrayList.size();
     }
 
-    public class RecyclerViewHolder extends RecyclerView.ViewHolder {
-        private TextView roomIndicator;
-        private TextView valueIndicator;
-        private TextView description;
-        private View line;
+    public static class RecyclerViewHolder extends RecyclerView.ViewHolder {
+        private final TextView roomIndicator;
+        private final TextView valueIndicator;
+        private final TextView description;
+        private final View line;
 
         RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -74,8 +74,8 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerGridAdapte
         }
 
         @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent,
-                                   RecyclerView.State state) {
+        public void getItemOffsets(Rect outRect, @NonNull View view, @NonNull RecyclerView parent,
+                                   @NonNull RecyclerView.State state) {
             outRect.right = horizontalSpaceWidth;
             outRect.left = horizontalSpaceWidth;
         }

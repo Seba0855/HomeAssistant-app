@@ -44,8 +44,6 @@ public class MainActivity extends AppCompatActivity {
         topAppBar = new MaterialToolbar(findViewById(R.id.topAppBar).getContext());
         setSupportActionBar(topAppBar);
 
-
-        Log.d(TAG, "Invoking getData() before recyclerView has been created");
         getData();
 
         Log.i(TAG, "temperature: " + temperatureValues.get(IN_TEMP));
@@ -81,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
         );
 
         recyclerView.setAdapter(adapter);
-        Log.d(TAG, "recyclerView created");
 
         ActionMenuItemView refresh = findViewById(R.id.refresh);
         refresh.setOnClickListener(view -> {
@@ -91,7 +88,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
+    /**
+     * getData() gets temperature and humidity data from blynk datastream
+     *
+     * onNext(): downloading data and inserting it into HashMap
+     * onError(): if there is connection error, make Toast with proper message. If there was already
+     *            no connection on app cold start, use -.-- as value indicator.
+     * onComplete(): updates layout to refresh data
+     */
     private void getData() {
         String token = getResources().getString(R.string.blynk_token);
 
@@ -144,7 +148,8 @@ public class MainActivity extends AppCompatActivity {
                             adapter.notifyItemChanged(1);
                         }
 
-                        Toast.makeText(getApplicationContext(), "dupa", Toast.LENGTH_LONG).show();
+                        // temporary
+                        Toast.makeText(getApplicationContext(), "Błąd połączenia", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
