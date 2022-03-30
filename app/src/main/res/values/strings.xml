@@ -15,8 +15,10 @@
     <string name="page_1">Pulpit</string>
     <string name="page_2">Wykresy</string>
     <string name="page_3">Ustawienia</string>
+
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">You\'re in charts tab</string>
+    <string name="settings_hello">You\'re in settings tab</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>

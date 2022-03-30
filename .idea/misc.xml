@@ -4,8 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/HomeAssistant/app/src/main/res/drawable/ic_home.xml" value="0.276" />
-        <entry key="..\:/HomeAssistant/app/src/main/res/layout/activity_main.xml" value="0.22916666666666666" />
+        <entry key="..\:/HomeAssistant/app/src/main/res/layout/activity_main.xml" value="0.67" />
+        <entry key="..\:/HomeAssistant/app/src/main/res/layout/fragment_chart.xml" value="0.6974206349206349" />
         <entry key="..\:/HomeAssistant/app/src/main/res/layout/fragment_main.xml" value="0.6974206349206349" />
+        <entry key="..\:/HomeAssistant/app/src/main/res/layout/fragment_settings.xml" value="0.6974206349206349" />
         <entry key="..\:/HomeAssistant/app/src/main/res/layout/grid_item.xml" value="0.33" />
         <entry key="..\:/HomeAssistant/app/src/main/res/menu/bottom_navigation_view.xml" value="0.8243559718969555" />
         <entry key="..\:/HomeAssistant/app/src/main/res/menu/top_app_bar.xml" value="0.36666666666666664" />
