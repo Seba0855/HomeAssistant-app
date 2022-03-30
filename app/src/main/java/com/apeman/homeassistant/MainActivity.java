@@ -1,10 +1,8 @@
 package com.apeman.homeassistant;
 
 import android.os.Bundle;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,8 +11,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.apeman.homeassistant.blynk.BlynkClient;
+import com.apeman.homeassistant.blynk.BlynkData;
+import com.apeman.homeassistant.fragments.ChartFragment;
+import com.apeman.homeassistant.fragments.MainFragment;
+import com.apeman.homeassistant.fragments.RecyclerGridAdapter;
+import com.apeman.homeassistant.fragments.SettingsFragment;
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;

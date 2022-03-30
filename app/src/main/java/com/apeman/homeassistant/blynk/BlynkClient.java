@@ -1,4 +1,4 @@
-package com.apeman.homeassistant;
+package com.apeman.homeassistant.blynk;
 
 import androidx.annotation.NonNull;
 

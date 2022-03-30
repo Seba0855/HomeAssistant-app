@@ -1,4 +1,4 @@
-package com.apeman.homeassistant;
+package com.apeman.homeassistant.blynk;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

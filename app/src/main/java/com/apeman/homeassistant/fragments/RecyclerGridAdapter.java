@@ -1,4 +1,4 @@
-package com.apeman.homeassistant;
+package com.apeman.homeassistant.fragments;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.apeman.homeassistant.CardContent;
+import com.apeman.homeassistant.R;
 
 import java.util.ArrayList;
 
