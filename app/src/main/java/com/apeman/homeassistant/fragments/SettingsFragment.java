@@ -1,13 +1,13 @@
 package com.apeman.homeassistant.fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+
+import com.apeman.homeassistant.MainActivity;
 import com.apeman.homeassistant.R;
 
 /**
@@ -55,6 +55,8 @@ public class SettingsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        ((MainActivity) requireActivity()).disableNavigationTooltips();
     }
 
     @Override

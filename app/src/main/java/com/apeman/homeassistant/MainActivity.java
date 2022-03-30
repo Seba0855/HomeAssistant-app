@@ -1,56 +1,49 @@
 package com.apeman.homeassistant;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.ActionMenuItemView;
+import androidx.appcompat.widget.TooltipCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.apeman.homeassistant.blynk.BlynkClient;
-import com.apeman.homeassistant.blynk.BlynkData;
 import com.apeman.homeassistant.fragments.ChartFragment;
 import com.apeman.homeassistant.fragments.MainFragment;
-import com.apeman.homeassistant.fragments.RecyclerGridAdapter;
 import com.apeman.homeassistant.fragments.SettingsFragment;
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.Observer;
-import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
-
 public class MainActivity extends AppCompatActivity {
+    BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        // Set the bottom navigation view
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnItemSelectedListener(navListener);
 
+        // Disable navigation tooltips
+        disableNavigationTooltips();
+
+        // Set default fragment as MainFragment
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, new MainFragment())
                 .commit();
-
     }
 
-    private final NavigationBarView.OnItemSelectedListener navListener = item -> {
-        // Cannot use switch statement as resource identifiers are not final
 
+    /**
+     * Fragment selector - it allows user to switch
+     * between fragments available on bottom navigation view.
+     */
+    private final NavigationBarView.OnItemSelectedListener navListener = item -> {
         Fragment selectedFragment = null;
 
+        // Fragment selector
         if (item.getItemId() == R.id.homenav) {
             selectedFragment = new MainFragment();
         } else if (item.getItemId() == R.id.wykresy) {
@@ -61,10 +54,25 @@ public class MainActivity extends AppCompatActivity {
 
 
         assert selectedFragment != null;
+        // Switch fragment to selected above
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, selectedFragment)
                 .commit();
         return true;
     };
+
+    /**
+     * Method which disables menu tooltips,
+     * which were displayed on long menuItem click.
+     */
+    public void disableNavigationTooltips() {
+        Menu menu = bottomNavigationView.getMenu();
+        int menuSize = menu.size();
+
+        for (int i = 0; i < menuSize; i++) {
+            MenuItem menuItem = menu.getItem(i);
+            TooltipCompat.setTooltipText(findViewById(menuItem.getItemId()), null);
+        }
+    }
 }
