@@ -84,6 +84,7 @@ public class MainFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Get data from sensors
         getData();
 
         cardContentArrayList = new ArrayList<>();
