@@ -13,3 +13,5 @@ r
 Bapp/src/main/java/com/apeman/homeassistant/blynk/BlynkService.java,8\3\83cdde2d2a5a99394bc85fe157024811d4465719
 q
 Aapp/src/main/java/com/apeman/homeassistant/blynk/BlynkClient.java,9\c\9c3c2efe9e7dc82df2601f840328749110cf228c
+<
+build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35

@@ -17,8 +17,9 @@
     <string name="page_3">Ustawienia</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">You\'re in charts tab</string>
-    <string name="settings_hello">You\'re in settings tab</string>
+    <string name="charts_info">Charts tab is \nunder development</string>
+    <string name="settings_info">Settings tab is \nunder development</string>
+    <string name="contentdesc">code under development</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>

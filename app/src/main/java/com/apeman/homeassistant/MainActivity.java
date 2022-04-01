@@ -57,6 +57,12 @@ public class MainActivity extends AppCompatActivity {
         // Switch fragment to selected above
         getSupportFragmentManager()
                 .beginTransaction()
+                .setCustomAnimations(
+                        R.anim.slide_in, // enter
+                        R.anim.fade_out,
+                        R.anim.fade_in,
+                        R.anim.slide_in
+                )
                 .replace(R.id.fragment_container, selectedFragment)
                 .commit();
         return true;
