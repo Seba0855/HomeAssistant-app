@@ -69,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
     };
 
     /**
-     * Method which disables menu tooltips,
-     * which were displayed on long menuItem click.
+     * Disables menu tooltips, which were displayed
+     * on long menuItem click.
      */
     public void disableNavigationTooltips() {
         Menu menu = bottomNavigationView.getMenu();

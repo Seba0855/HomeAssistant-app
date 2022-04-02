@@ -1,0 +1,7 @@
+
+@
+java:S1068"+Remove this unused "context" private field.(êİç
+R
+java:S1068G"7Remove this unused "verticalSpaceHeight" private field.(ÓŞ˜Ãúÿÿÿÿ
+
+java:S1319"sThe type of "recyclerCardContent" should be an interface such as "List" rather than the implementation "ArrayList".(æ³Áùÿÿÿÿ

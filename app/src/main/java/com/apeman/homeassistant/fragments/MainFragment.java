@@ -56,6 +56,7 @@ public class MainFragment extends Fragment {
 
         cardContentArrayList = new ArrayList<>();
 
+        // Creating new cards
         cardContentArrayList.add(new CardContent(
                 "Salon",
                 temperatureValues.get(IN_TEMP),
@@ -69,10 +70,7 @@ public class MainFragment extends Fragment {
                 "Wilgotność"
         ));
 
-        Log.i(TAG, "temperature: " + temperatureValues.get(IN_TEMP));
-        Log.i(TAG, "humidity: " + temperatureValues.get(IN_HUM));
-        Log.i(TAG, "hashmap keys: " + temperatureValues.keySet());
-        Log.i(TAG, "hashmap values: " + temperatureValues.values());
+        debugValues();
     }
 
     @Override
@@ -81,15 +79,20 @@ public class MainFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
-
+        // Setting the RecyclerView and app bar
         RecyclerView recyclerView = view.findViewById(R.id.cardsDeck);
         MaterialToolbar topAppBar = new MaterialToolbar(view.findViewById(R.id.topAppBar).getContext());
+
+        // Setting MaterialToolbar to be support action bar
         ((AppCompatActivity) requireActivity()).setSupportActionBar(topAppBar);
 
         adapter = new RecyclerGridAdapter(cardContentArrayList, getContext());
 
+        // Customizing RecyclerView to use grid features. Splitting it to 2 columns
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(layoutManager);
+
+        // Spacing between cards
         recyclerView.addItemDecoration(
                 new RecyclerGridAdapter.VerticalSpaceItemDecoration(
                         VERTICAL_ITEM_SPACE,
@@ -98,6 +101,7 @@ public class MainFragment extends Fragment {
 
         recyclerView.setAdapter(adapter);
 
+        // Refresh button
         ActionMenuItemView refresh = view.findViewById(R.id.refresh);
         refresh.setOnClickListener(refreshView -> {
             refresh.animate().rotation(360.0f).setDuration(200).start();
@@ -132,11 +136,12 @@ public class MainFragment extends Fragment {
                     @Override
                     public void onNext(@NonNull BlynkData blynkData) {
                         Log.d(TAG, "onNext() invoked");
+                        
                         String temperature = blynkData.getTemperature();
                         String humidity = blynkData.getHumidity();
-
                         Log.d(TAG, "BlynkData temperature: " + temperature);
                         Log.d(TAG, "BlynkData humidity: " + humidity);
+
                         temperatureValues.put(IN_TEMP,
                                 temperature.substring(0, 4) + "\u00B0"
                         );
@@ -149,10 +154,7 @@ public class MainFragment extends Fragment {
                     public void onError(@NonNull Throwable e) {
                         Log.e(TAG, "onError()");
                         e.printStackTrace();
-                        Log.i(TAG, "temperature: " + temperatureValues.get(IN_TEMP));
-                        Log.i(TAG, "humidity: " + temperatureValues.get(IN_HUM));
-                        Log.i(TAG, "hashmap keys: " + temperatureValues.keySet());
-                        Log.i(TAG, "hashmap values: " + temperatureValues.values());
+                        debugValues();
 
                         if (temperatureValues.get(IN_TEMP) == null
                                 && temperatureValues.get(IN_HUM) == null) {
@@ -160,11 +162,7 @@ public class MainFragment extends Fragment {
                             temperatureValues.put(IN_TEMP, "--.-" + "\u00B0");
                             temperatureValues.put(IN_HUM, "--.-%");
 
-                            cardContentArrayList.get(0).setValue(temperatureValues.get(IN_TEMP));
-                            cardContentArrayList.get(1).setValue(temperatureValues.get(IN_HUM));
-
-                            adapter.notifyItemChanged(0);
-                            adapter.notifyItemChanged(1);
+                            updateTemperatures();
                         }
 
                         // temporary
@@ -174,11 +172,32 @@ public class MainFragment extends Fragment {
                     @Override
                     public void onComplete() {
                         Log.d(TAG, "onComplete()");
-                        cardContentArrayList.get(0).setValue(temperatureValues.get(IN_TEMP));
-                        cardContentArrayList.get(1).setValue(temperatureValues.get(IN_HUM));
-                        adapter.notifyItemChanged(0);
-                        adapter.notifyItemChanged(1);
+                        updateTemperatures();
                     }
                 });
+    }
+
+    /**
+     * Sets temperature values in cardContentArrayList
+     * and refreshes layout to apply changes.
+     */
+    private void updateTemperatures() {
+        // Set values in cardContentArrayList
+        cardContentArrayList.get(0).setValue(temperatureValues.get(IN_TEMP));
+        cardContentArrayList.get(1).setValue(temperatureValues.get(IN_HUM));
+
+        // Update layout to apply changes
+        adapter.notifyItemChanged(0);
+        adapter.notifyItemChanged(1);
+    }
+
+    /**
+     * Temporary method to print useful information
+     */
+    private void debugValues() {
+        Log.i(TAG, "temperature: " + temperatureValues.get(IN_TEMP));
+        Log.i(TAG, "humidity: " + temperatureValues.get(IN_HUM));
+        Log.i(TAG, "hashmap keys: " + temperatureValues.keySet());
+        Log.i(TAG, "hashmap values: " + temperatureValues.values());
     }
 }
