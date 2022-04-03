@@ -16,6 +16,12 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
+    final Fragment mainFragment = new MainFragment();
+    final Fragment chartFragment = new ChartFragment();
+    final Fragment settingsFragment = new SettingsFragment();
+    Fragment active = mainFragment;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         // Set default fragment as MainFragment
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, new MainFragment())
+                .replace(R.id.fragment_container, active)
                 .commit();
     }
 
@@ -41,19 +47,15 @@ public class MainActivity extends AppCompatActivity {
      * between fragments available on bottom navigation view.
      */
     private final NavigationBarView.OnItemSelectedListener navListener = item -> {
-        Fragment selectedFragment = null;
-
         // Fragment selector
         if (item.getItemId() == R.id.homenav) {
-            selectedFragment = new MainFragment();
+            active = mainFragment;
         } else if (item.getItemId() == R.id.wykresy) {
-            selectedFragment = new ChartFragment();
+            active = chartFragment;
         } else if (item.getItemId() == R.id.ustawienia) {
-            selectedFragment = new SettingsFragment();
+            active = settingsFragment;
         }
 
-
-        assert selectedFragment != null;
         // Switch fragment to selected above
         getSupportFragmentManager()
                 .beginTransaction()
@@ -63,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                         R.anim.fade_in,
                         R.anim.slide_in
                 )
-                .replace(R.id.fragment_container, selectedFragment)
+                .replace(R.id.fragment_container, active)
                 .commit();
         return true;
     };

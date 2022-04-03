@@ -136,7 +136,7 @@ public class MainFragment extends Fragment {
                     @Override
                     public void onNext(@NonNull BlynkData blynkData) {
                         Log.d(TAG, "onNext() invoked");
-                        
+
                         String temperature = blynkData.getTemperature();
                         String humidity = blynkData.getHumidity();
                         Log.d(TAG, "BlynkData temperature: " + temperature);
@@ -153,6 +153,8 @@ public class MainFragment extends Fragment {
                     @Override
                     public void onError(@NonNull Throwable e) {
                         Log.e(TAG, "onError()");
+
+                        // debug, get rid of it before deploying it anywhere
                         e.printStackTrace();
                         debugValues();
 
