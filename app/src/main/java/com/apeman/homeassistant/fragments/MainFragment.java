@@ -133,6 +133,13 @@ public class MainFragment extends Fragment {
 
                     }
 
+                    /**
+                     * Gets information retrieved from Blynk datastreams
+                     * and adds that data to sufficient data strucutres
+                     *
+                     * @param blynkData: object of BlynkData containing information
+                     *                 retrieved from Blynk datastreams
+                     */
                     @Override
                     public void onNext(@NonNull BlynkData blynkData) {
                         Log.d(TAG, "onNext() invoked");
@@ -142,6 +149,7 @@ public class MainFragment extends Fragment {
                         Log.d(TAG, "BlynkData temperature: " + temperature);
                         Log.d(TAG, "BlynkData humidity: " + humidity);
 
+                        // Adding temperature data to temperatureValue HashMap
                         temperatureValues.put(IN_TEMP,
                                 temperature.substring(0, 4) + "\u00B0"
                         );
@@ -150,6 +158,13 @@ public class MainFragment extends Fragment {
                         );
                     }
 
+                    /**
+                     * Catches connection error. If connection error appear on cold app start
+                     * fill the temperatureValues HashMap with "--.-" fillers to notify user
+                     * that there are a connection error and data has not been retrieved.
+                     *
+                     * @param e: Throwable object containing error StackTrace
+                     */
                     @Override
                     public void onError(@NonNull Throwable e) {
                         Log.e(TAG, "onError()");
@@ -171,6 +186,9 @@ public class MainFragment extends Fragment {
                         Toast.makeText(getContext(), "Błąd połączenia", Toast.LENGTH_LONG).show();
                     }
 
+                    /**
+                     * Updates cards in layout on transaction completed
+                     */
                     @Override
                     public void onComplete() {
                         Log.d(TAG, "onComplete()");
