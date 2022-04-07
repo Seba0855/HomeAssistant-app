@@ -12,8 +12,11 @@ public class BlynkDoorStatus {
         this.doorStatus = doorStatus;
     }
 
-    public boolean getDoorStatus() {
-        return doorStatus;
+    public String getDoorStatus() {
+        if (doorStatus) {
+            return "Open";
+        }
+        return "Closed";
     }
 
     public void setDoorStatus(boolean doorStatus) {
