@@ -62,39 +62,10 @@ public class MainFragment extends Fragment {
         getData();
         getDoorStatus();
 
-        // Creating new cards
-        cardContentArrayList.add(new CardContent(
-                "Salon",
-                cardValues.get(IN_TEMP),
-                "Czujnik temperatury wew."
-        ));
+        // Main content
+        createCardViews();
 
-        cardContentArrayList.add(new CardContent(
-                "Dom",
-                cardValues.get(IN_HUM),
-                "Wilgotność"
-        ));
-
-        cardContentArrayList.add(new CardContent(
-                "Drzwi w biurze",
-                cardValues.get(DOOR_STATUS),
-                "Czujnik otwarcia drzwi"
-        ));
-
-        cardContentArrayList.add(new CardContent(
-                "Okno w biurze",
-                cardValues.get(WINDOW_STATUS),
-                "Czujnik otwarcia okna"
-        ));
-
-        // Set line colors
-        cardContentArrayList.get(0).setLineColor(R.color.orange);
-        cardContentArrayList.get(1).setLineColor(R.color.light_blue);
-
-        // Set text size for door status card
-        cardContentArrayList.get(2).setValueTextSize(26);
-        cardContentArrayList.get(3).setValueTextSize(26);
-
+        // Some debug values
         debugValues();
     }
 
@@ -274,7 +245,7 @@ public class MainFragment extends Fragment {
             cardContentArrayList.get(id).setLineColor(R.color.light_green);
 
         } else {
-            cardValues.put(DOOR_STATUS, "Closed");
+            cardValues.put(object, "Closed");
             cardContentArrayList.get(id).setLineColor(R.color.red);
         }
     }
@@ -308,5 +279,41 @@ public class MainFragment extends Fragment {
         Log.i(TAG, "humidity: " + cardValues.get(IN_HUM));
         Log.i(TAG, "hashmap keys: " + cardValues.keySet());
         Log.i(TAG, "hashmap values: " + cardValues.values());
+    }
+
+    private void createCardViews() {
+        // TODO: Simplify this
+        // Creating new cards
+        cardContentArrayList.add(new CardContent(
+                "Salon",
+                cardValues.get(IN_TEMP),
+                "Czujnik temperatury wew."
+        ));
+
+        cardContentArrayList.add(new CardContent(
+                "Dom",
+                cardValues.get(IN_HUM),
+                "Wilgotność"
+        ));
+
+        cardContentArrayList.add(new CardContent(
+                "Drzwi w biurze",
+                cardValues.get(DOOR_STATUS),
+                "Czujnik otwarcia drzwi"
+        ));
+
+        cardContentArrayList.add(new CardContent(
+                "Okno w biurze",
+                cardValues.get(WINDOW_STATUS),
+                "Czujnik otwarcia okna"
+        ));
+
+        // Set line colors
+        cardContentArrayList.get(0).setLineColor(R.color.orange);
+        cardContentArrayList.get(1).setLineColor(R.color.light_blue);
+
+        // Set text size for door status card
+        cardContentArrayList.get(2).setValueTextSize(26);
+        cardContentArrayList.get(3).setValueTextSize(26);
     }
 }
