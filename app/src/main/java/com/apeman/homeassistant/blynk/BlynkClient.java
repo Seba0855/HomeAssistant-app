@@ -32,6 +32,10 @@ public class BlynkClient {
     }
 
     public Observable<BlynkData> retrieveData(@NonNull String token) {
-        return blynkService.retrieveData(token, "", "");
+        return blynkService.retrieveData(token, "", "", "");
+    }
+
+    public Observable<BlynkDoorStatus> getDoorStatus(@NonNull String token) {
+        return blynkService.getDoorStatus(token, "");
     }
 }

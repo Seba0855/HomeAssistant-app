@@ -70,6 +70,15 @@ public class MainFragment extends Fragment {
                 "Wilgotność"
         ));
 
+        cardContentArrayList.add(new CardContent(
+                "Okno w biurze",
+                "Open",
+                R.color.light_green,
+                "Czujnik otwarcia okna"
+        ));
+
+        cardContentArrayList.get(2).setValueTextSize(26);
+
         debugValues();
     }
 
@@ -146,8 +155,10 @@ public class MainFragment extends Fragment {
 
                         String temperature = blynkData.getTemperature();
                         String humidity = blynkData.getHumidity();
+
                         Log.d(TAG, "BlynkData temperature: " + temperature);
                         Log.d(TAG, "BlynkData humidity: " + humidity);
+
 
                         // Adding temperature data to temperatureValue HashMap
                         temperatureValues.put(IN_TEMP,

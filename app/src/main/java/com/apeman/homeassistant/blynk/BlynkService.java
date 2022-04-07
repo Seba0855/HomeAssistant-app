@@ -18,6 +18,22 @@ public interface BlynkService {
     Observable<BlynkData> retrieveData(
             @Query("token") String token,
             @Query("V0") String a,
-            @Query("V1") String b
+            @Query("V1") String b,
+            @Query("V2") String c
+    );
+
+
+    /**
+     * Allows user to get information if doors are open or closed
+     * (defined by V2 virtualPin value)
+     *
+     * @param token Blynk.cloud token
+     * @param a as "V2" does not take any parameters, it should be always null
+     * @return Observable<BlynkData>
+     */
+    @GET("get")
+    Observable<BlynkDoorStatus> getDoorStatus(
+            @Query("token") String token,
+            @Query("V2") String a
     );
 }

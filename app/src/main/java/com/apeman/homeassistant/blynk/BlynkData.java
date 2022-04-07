@@ -13,10 +13,13 @@ public class BlynkData {
     @Expose
     private final String humidity;
 
-    public BlynkData(String temperature, String humidity) {
+    @SerializedName("V2")
+    @Expose
+    private boolean doorStatus;
+
+    public BlynkData(String temperature, String humidity, boolean doorStatus) {
         this.temperature = temperature;
         this.humidity = humidity;
-
     }
 
     public String getTemperature() {

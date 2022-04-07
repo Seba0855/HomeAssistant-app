@@ -5,12 +5,15 @@ public class CardContent {
     private String value;
     private String description;
     private int lineColor;
+    private int valueTextSize;
 
     public CardContent(String roomIndicator, String value, int lineColor, String description) {
         this.roomIndicator = roomIndicator;
         this.value = value;
         this.lineColor = lineColor;
         this.description = description;
+
+        valueTextSize = 34; // Default text size of value indicator set to 34sp
     }
 
     public String getValue() {
@@ -44,4 +47,13 @@ public class CardContent {
     public void setRoomIndicator(String roomIndicator) {
         this.roomIndicator = roomIndicator;
     }
+
+    public int getValueTextSize() {
+        return valueTextSize;
+    }
+
+    public void setValueTextSize(int valueTextSize) {
+        this.valueTextSize = valueTextSize;
+    }
+
 }

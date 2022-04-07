@@ -40,6 +40,8 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerGridAdapte
         holder.valueIndicator.setText(cardContent.getValue());
         holder.line.setBackgroundResource(cardContent.getLineColor());
         holder.description.setText(cardContent.getDescription());
+
+        holder.valueIndicator.setTextSize(cardContent.getValueTextSize());
     }
 
     @Override
