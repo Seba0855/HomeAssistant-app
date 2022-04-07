@@ -4,22 +4,40 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class BlynkDoorStatus {
+
     @SerializedName("V2")
     @Expose
-    private boolean doorStatus;
+    private int doorStatus;
 
-    public BlynkDoorStatus(boolean doorStatus) {
+    @SerializedName("V3")
+    @Expose
+    private int windowStatus;
+
+    public BlynkDoorStatus(int doorStatus, int windowStatus) {
+        this.doorStatus = doorStatus;
+        this.windowStatus = windowStatus;
+    }
+
+    public int getDoorStatus() {
+        return doorStatus;
+    }
+
+    public void setDoorStatus(int doorStatus) {
         this.doorStatus = doorStatus;
     }
 
-    public String getDoorStatus() {
-        if (doorStatus) {
+    public int getWindowStatus() {
+        return windowStatus;
+    }
+
+    public void setWindowStatus(int windowStatus) {
+        this.windowStatus = windowStatus;
+    }
+
+    public String getStatus(int objectStatus) {
+        if (objectStatus == 1) {
             return "Open";
         }
         return "Closed";
-    }
-
-    public void setDoorStatus(boolean doorStatus) {
-        this.doorStatus = doorStatus;
     }
 }

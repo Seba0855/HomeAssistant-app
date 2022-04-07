@@ -17,10 +17,14 @@ import com.apeman.homeassistant.CardContent;
 import com.apeman.homeassistant.R;
 import com.apeman.homeassistant.blynk.BlynkClient;
 import com.apeman.homeassistant.blynk.BlynkData;
+import com.apeman.homeassistant.blynk.BlynkDoorStatus;
 import com.google.android.material.appbar.MaterialToolbar;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
@@ -32,7 +36,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
  * A simple {@link Fragment} subclass.
  */
 public class MainFragment extends Fragment {
-    HashMap<String, String> temperatureValues = new HashMap<>();
+    HashMap<String, String> cardValues = new HashMap<>();
 
     private ArrayList<CardContent> cardContentArrayList;
     private RecyclerGridAdapter adapter;
@@ -40,6 +44,8 @@ public class MainFragment extends Fragment {
     private static final String TAG = "MainActivity";
     private static final String IN_TEMP = "insideTemperature";
     private static final String IN_HUM = "insideHumidity";
+    private static final String DOOR_STATUS = "doorStatus";
+    private static final String WINDOW_STATUS = "windowStatus";
 
     private static final int VERTICAL_ITEM_SPACE = 0;
     private static final int HORIZONTAL_ITEM_SPACE = 16;
@@ -51,33 +57,43 @@ public class MainFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        cardContentArrayList = new ArrayList<>();
         // Get data from sensors
         getData();
-
-        cardContentArrayList = new ArrayList<>();
+        getDoorStatus();
 
         // Creating new cards
         cardContentArrayList.add(new CardContent(
                 "Salon",
-                temperatureValues.get(IN_TEMP),
-                R.color.orange,
+                cardValues.get(IN_TEMP),
                 "Czujnik temperatury wew."
         ));
+
         cardContentArrayList.add(new CardContent(
                 "Dom",
-                temperatureValues.get(IN_HUM),
-                R.color.light_blue,
+                cardValues.get(IN_HUM),
                 "Wilgotność"
         ));
 
         cardContentArrayList.add(new CardContent(
+                "Drzwi w biurze",
+                cardValues.get(DOOR_STATUS),
+                "Czujnik otwarcia drzwi"
+        ));
+
+        cardContentArrayList.add(new CardContent(
                 "Okno w biurze",
-                "Open",
-                R.color.light_green,
+                cardValues.get(WINDOW_STATUS),
                 "Czujnik otwarcia okna"
         ));
 
+        // Set line colors
+        cardContentArrayList.get(0).setLineColor(R.color.orange);
+        cardContentArrayList.get(1).setLineColor(R.color.light_blue);
+
+        // Set text size for door status card
         cardContentArrayList.get(2).setValueTextSize(26);
+        cardContentArrayList.get(3).setValueTextSize(26);
 
         debugValues();
     }
@@ -115,6 +131,7 @@ public class MainFragment extends Fragment {
         refresh.setOnClickListener(refreshView -> {
             refresh.animate().rotation(360.0f).setDuration(200).start();
             getData();
+            getDoorStatus();
         });
 
         return view;
@@ -151,7 +168,7 @@ public class MainFragment extends Fragment {
                      */
                     @Override
                     public void onNext(@NonNull BlynkData blynkData) {
-                        Log.d(TAG, "onNext() invoked");
+                        Log.d(TAG, "onNext() BlynkData invoked");
 
                         String temperature = blynkData.getTemperature();
                         String humidity = blynkData.getHumidity();
@@ -161,10 +178,10 @@ public class MainFragment extends Fragment {
 
 
                         // Adding temperature data to temperatureValue HashMap
-                        temperatureValues.put(IN_TEMP,
+                        cardValues.put(IN_TEMP,
                                 temperature.substring(0, 4) + "\u00B0"
                         );
-                        temperatureValues.put(IN_HUM,
+                        cardValues.put(IN_HUM,
                                 humidity.substring(0, 4) + "%"
                         );
                     }
@@ -184,13 +201,13 @@ public class MainFragment extends Fragment {
                         e.printStackTrace();
                         debugValues();
 
-                        if (temperatureValues.get(IN_TEMP) == null
-                                && temperatureValues.get(IN_HUM) == null) {
+                        if (cardValues.get(IN_TEMP) == null
+                                && cardValues.get(IN_HUM) == null) {
 
-                            temperatureValues.put(IN_TEMP, "--.-" + "\u00B0");
-                            temperatureValues.put(IN_HUM, "--.-%");
+                            cardValues.put(IN_TEMP, "--.-" + "\u00B0");
+                            cardValues.put(IN_HUM, "--.-%");
 
-                            updateTemperatures();
+                            updateLayout();
                         }
 
                         // temporary
@@ -203,32 +220,93 @@ public class MainFragment extends Fragment {
                     @Override
                     public void onComplete() {
                         Log.d(TAG, "onComplete()");
-                        updateTemperatures();
+                        updateLayout();
                     }
                 });
     }
 
+    private void getDoorStatus() {
+        String token = getResources().getString(R.string.blynk_token);
+
+        BlynkClient.getInstance()
+                .getDoorStatus(token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<BlynkDoorStatus>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        Log.d(TAG, "onSubscribe() BlynkDoorStatus invoked");
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull BlynkDoorStatus blynkDoorStatus) {
+                        Log.d(TAG, "onNext() BlynkDoorStatus invoked");
+
+                        String doorStatus = blynkDoorStatus.getStatus(blynkDoorStatus.getDoorStatus());
+                        String windowStatus = blynkDoorStatus.getStatus(blynkDoorStatus.getWindowStatus());
+                        Log.d(TAG, "door status: " + doorStatus);
+                        Log.d(TAG, "window status: " + windowStatus);
+
+//                        // TODO: get rid of hardcoded IDs
+                        setObjectStatus(DOOR_STATUS, 2, doorStatus);
+                        setObjectStatus(WINDOW_STATUS, 3, windowStatus);
+
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e(TAG, "BlynkDoorStatus error");
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d(TAG, "onComplete()");
+                        updateLayout();
+                    }
+                });
+    }
+
+    private void setObjectStatus(String object, int id, String status) {
+        if (status.equals("Open")) {
+            cardValues.put(object, "Open");
+            cardContentArrayList.get(id).setLineColor(R.color.light_green);
+
+        } else {
+            cardValues.put(DOOR_STATUS, "Closed");
+            cardContentArrayList.get(id).setLineColor(R.color.red);
+        }
+    }
+
     /**
-     * Sets temperature values in cardContentArrayList
+     * Sets values in cardContentArrayList
      * and refreshes layout to apply changes.
      */
-    private void updateTemperatures() {
+    private void updateLayout() {
         // Set values in cardContentArrayList
-        cardContentArrayList.get(0).setValue(temperatureValues.get(IN_TEMP));
-        cardContentArrayList.get(1).setValue(temperatureValues.get(IN_HUM));
+        List<String> indexes = new ArrayList<>();
+        Collections.addAll(indexes,
+                IN_TEMP,
+                IN_HUM,
+                DOOR_STATUS,
+                WINDOW_STATUS);
 
         // Update layout to apply changes
-        adapter.notifyItemChanged(0);
-        adapter.notifyItemChanged(1);
+        for (int i = 0; i < adapter.getItemCount(); i++) {
+            cardContentArrayList.get(i).setValue(cardValues.get(indexes.get(i)));
+            adapter.notifyItemChanged(i);
+        }
+
     }
 
     /**
      * Temporary method to print useful information
      */
     private void debugValues() {
-        Log.i(TAG, "temperature: " + temperatureValues.get(IN_TEMP));
-        Log.i(TAG, "humidity: " + temperatureValues.get(IN_HUM));
-        Log.i(TAG, "hashmap keys: " + temperatureValues.keySet());
-        Log.i(TAG, "hashmap values: " + temperatureValues.values());
+        Log.i(TAG, "temperature: " + cardValues.get(IN_TEMP));
+        Log.i(TAG, "humidity: " + cardValues.get(IN_HUM));
+        Log.i(TAG, "hashmap keys: " + cardValues.keySet());
+        Log.i(TAG, "hashmap values: " + cardValues.values());
     }
 }

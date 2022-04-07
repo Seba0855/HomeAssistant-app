@@ -36,6 +36,6 @@ public class BlynkClient {
     }
 
     public Observable<BlynkDoorStatus> getDoorStatus(@NonNull String token) {
-        return blynkService.getDoorStatus(token, "");
+        return blynkService.getDoorStatus(token, "", "");
     }
 }

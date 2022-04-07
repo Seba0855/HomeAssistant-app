@@ -34,6 +34,7 @@ public interface BlynkService {
     @GET("get")
     Observable<BlynkDoorStatus> getDoorStatus(
             @Query("token") String token,
-            @Query("V2") String a
+            @Query("V2") String a,
+            @Query("V3") String b
     );
 }

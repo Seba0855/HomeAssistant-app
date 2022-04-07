@@ -5,14 +5,6 @@ X
 Napp/src/androidTest/java/com/apeman/homeassistant/ExampleInstrumentedTest.java,a\f\af80a52855417f510c9b38aeec1455935e8b9a57
 o
 ?app/src/test/java/com/apeman/homeassistant/ExampleUnitTest.java,e\5\e509293e943e56b1cb0f2a9b2bb3fa5f55898f1b
-k
-;app/src/main/java/com/apeman/homeassistant/CardContent.java,c\6\c6e263a3df600ec45e2dbf851b13d5b4137777a3
-o
-?app/src/main/java/com/apeman/homeassistant/blynk/BlynkData.java,b\d\bdf1c3053af714a7224dcb4c7d93bc74b2332d49
-r
-Bapp/src/main/java/com/apeman/homeassistant/blynk/BlynkService.java,8\3\83cdde2d2a5a99394bc85fe157024811d4465719
-q
-Aapp/src/main/java/com/apeman/homeassistant/blynk/BlynkClient.java,9\c\9c3c2efe9e7dc82df2601f840328749110cf228c
 <
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
 w
@@ -21,5 +13,3 @@ Gapp/src/main/java/com/apeman/homeassistant/fragments/ChartFragment.java,7\3\73
 Mapp/src/main/java/com/apeman/homeassistant/fragments/RecyclerGridAdapter.java,a\d\ad591a1dd29282877c5c8b5f1482ee7750ab1240
 z
 Japp/src/main/java/com/apeman/homeassistant/fragments/SettingsFragment.java,0\1\0185b637d61d3a4a55c1460a3cf81bd52773eb93
-@
-app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164

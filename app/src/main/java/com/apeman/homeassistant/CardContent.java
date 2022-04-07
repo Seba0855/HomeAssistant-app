@@ -7,10 +7,9 @@ public class CardContent {
     private int lineColor;
     private int valueTextSize;
 
-    public CardContent(String roomIndicator, String value, int lineColor, String description) {
+    public CardContent(String roomIndicator, String value, String description) {
         this.roomIndicator = roomIndicator;
         this.value = value;
-        this.lineColor = lineColor;
         this.description = description;
 
         valueTextSize = 34; // Default text size of value indicator set to 34sp
