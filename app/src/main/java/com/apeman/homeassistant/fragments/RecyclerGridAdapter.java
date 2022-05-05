@@ -2,9 +2,11 @@ package com.apeman.homeassistant.fragments;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,6 +44,7 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerGridAdapte
         holder.description.setText(cardContent.getDescription());
 
         holder.valueIndicator.setTextSize(cardContent.getValueTextSize());
+        holder.icon.setImageResource(R.drawable.ic_humidity);
     }
 
     @Override
@@ -54,6 +57,7 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerGridAdapte
         private final TextView valueIndicator;
         private final TextView description;
         private final View line;
+        private ImageView icon;
 
         RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -61,6 +65,7 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerGridAdapte
             valueIndicator = itemView.findViewById(R.id.value_indicator);
             line = itemView.findViewById(R.id.line);
             description = itemView.findViewById(R.id.name);
+            icon = itemView.findViewById(R.id.icon);
         }
     }
 

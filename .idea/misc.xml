@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.27760416666666665" />
         <entry key="..\:/HomeAssistant/app/src/main/res/drawable/ic_home.xml" value="0.276" />
         <entry key="..\:/HomeAssistant/app/src/main/res/layout/activity_main.xml" value="0.67" />
         <entry key="..\:/HomeAssistant/app/src/main/res/layout/fragment_chart.xml" value="0.6974206349206349" />
@@ -15,11 +16,17 @@
         <entry key="app/src/main/res/drawable/ic_baseline_code_24.xml" value="0.211" />
         <entry key="app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.211" />
         <entry key="app/src/main/res/drawable/ic_home.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic_humidity.xml" value="0.10037225341796874" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic_power_plug.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic_right_arrow.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic_sensor.xml" value="0.211" />
+        <entry key="app/src/main/res/drawable/ic_temperature_reader.xml" value="0.211" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.14719202898550723" />
         <entry key="app/src/main/res/layout/fragment_chart.xml" value="0.20018115942028986" />
         <entry key="app/src/main/res/layout/fragment_main.xml" value="0.20018115942028986" />
-        <entry key="app/src/main/res/layout/grid_item.xml" value="0.836578369140625" />
+        <entry key="app/src/main/res/layout/grid_item.xml" value="0.7941131591796875" />
+        <entry key="app/src/main/res/menu/top_app_bar.xml" value="0.25104166666666666" />
       </map>
     </option>
   </component>
@@ -29,5 +36,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.7941131591796875" />
+      </ProjectState>
+    </option>
   </component>
 </project>
