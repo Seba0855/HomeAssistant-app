@@ -44,7 +44,7 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerGridAdapte
         holder.description.setText(cardContent.getDescription());
 
         holder.valueIndicator.setTextSize(cardContent.getValueTextSize());
-        holder.icon.setImageResource(R.drawable.ic_humidity);
+        //holder.icon.setImageResource(R.drawable.ic_humidity);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerGridAdapte
         private final TextView valueIndicator;
         private final TextView description;
         private final View line;
-        private ImageView icon;
+       // private ImageView icon;
 
         RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -65,7 +65,7 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerGridAdapte
             valueIndicator = itemView.findViewById(R.id.value_indicator);
             line = itemView.findViewById(R.id.line);
             description = itemView.findViewById(R.id.name);
-            icon = itemView.findViewById(R.id.icon);
+            //icon = itemView.findViewById(R.id.icon);
         }
     }
 
