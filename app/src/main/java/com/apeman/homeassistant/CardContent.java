@@ -4,10 +4,12 @@ public class CardContent {
     private String roomIndicator;
     private String value;
     private String description;
+    private int icon;
     private int lineColor;
     private int valueTextSize;
 
-    public CardContent(String roomIndicator, String value, String description) {
+    public CardContent(int icon, String roomIndicator, String value, String description) {
+        this.icon = icon;
         this.roomIndicator = roomIndicator;
         this.value = value;
         this.description = description;
@@ -54,5 +56,14 @@ public class CardContent {
     public void setValueTextSize(int valueTextSize) {
         this.valueTextSize = valueTextSize;
     }
+
+    public int getIcon() {
+        return icon;
+    }
+
+    public void setIcon(int icon) {
+        this.icon = icon;
+    }
+
 
 }
