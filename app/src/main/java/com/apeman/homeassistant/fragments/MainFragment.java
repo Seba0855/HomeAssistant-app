@@ -264,7 +264,7 @@ public class MainFragment extends Fragment {
                 WINDOW_STATUS);
 
         // Update layout to apply changes
-        for (int i = 0; i < adapter.getItemCount(); i++) {
+        for (int i = 0; i < adapter.getItemCount() - 1; i++) {
             cardContentArrayList.get(i).setValue(cardValues.get(indexes.get(i)));
             adapter.notifyItemChanged(i);
         }
@@ -283,41 +283,77 @@ public class MainFragment extends Fragment {
 
     private void createCardViews() {
         // TODO: Simplify this
+        // I should be awarded with an YandereDev order for this batch of horror
+
+
         // Creating new cards
         cardContentArrayList.add(new CardContent(
                 R.drawable.ic_temperature_reader,
-                "Salon",
-                cardValues.get(IN_TEMP),
-                "Czujnik temperatury wew."
+                CardContent.CardType.SENSOR
         ));
 
         cardContentArrayList.add(new CardContent(
                 R.drawable.ic_humidity,
+                CardContent.CardType.SENSOR
+        ));
+
+        cardContentArrayList.add(new CardContent(
+                R.drawable.ic_sensor,
+                CardContent.CardType.SENSOR
+        ));
+
+        cardContentArrayList.add(new CardContent(
+                R.drawable.ic_sensor,
+                CardContent.CardType.SENSOR
+        ));
+
+        cardContentArrayList.add(new CardContent(
+                R.drawable.ic_power_plug,
+                CardContent.CardType.RELAY
+        ));
+
+
+        // Setting cards parameters
+        cardContentArrayList.get(0).setSensorContent(
+                "Salon",
+                cardValues.get(IN_TEMP),
+                "Czujnik temperatury wew.",
+                34
+        );
+
+        cardContentArrayList.get(1).setSensorContent(
                 "Dom",
                 cardValues.get(IN_HUM),
-                "Wilgotność"
-        ));
+                "Wilgotność",
+                34
+        );
 
-        cardContentArrayList.add(new CardContent(
-                R.drawable.ic_sensor,
+        cardContentArrayList.get(2).setSensorContent(
                 "Drzwi w biurze",
                 cardValues.get(DOOR_STATUS),
-                "Czujnik otwarcia drzwi"
-        ));
+                "Czujnik otwarcia drzwi",
+                26
+        );
 
-        cardContentArrayList.add(new CardContent(
-                R.drawable.ic_sensor,
+        cardContentArrayList.get(3).setSensorContent(
                 "Okno w biurze",
                 cardValues.get(WINDOW_STATUS),
-                "Czujnik otwarcia okna"
-        ));
+                "Czujnik otwarcia okna",
+                26
+        );
+
+        cardContentArrayList.get(4).setRelayContent(
+                "Zasilanie",
+                "Światło w biurze",
+                "PlayStation 5"
+        );
 
         // Set line colors
         cardContentArrayList.get(0).setLineColor(R.color.orange);
         cardContentArrayList.get(1).setLineColor(R.color.light_blue);
 
-        // Set text size for door status card
-        cardContentArrayList.get(2).setValueTextSize(26);
-        cardContentArrayList.get(3).setValueTextSize(26);
+        // Set default indicators for relays
+        cardContentArrayList.get(4).setFirstIndicatorColor(R.color.light_green);
+        cardContentArrayList.get(4).setSecondIndicatorColor(R.color.red);
     }
 }
