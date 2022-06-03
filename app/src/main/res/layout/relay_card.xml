@@ -32,6 +32,17 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
+        <ImageView
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:src="@drawable/ic_right_arrow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.894"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.093" />
+
         <TextView
             android:id="@+id/relayIndicator"
             android:layout_width="wrap_content"
@@ -67,7 +78,7 @@
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="16dp"
             app:cardBackgroundColor="@color/red"
-            app:cardCornerRadius="4dp"
+            app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/power_first"
             app:layout_constraintHorizontal_bias="0.857"
@@ -104,7 +115,7 @@
             android:layout_height="10dp"
             android:layout_marginStart="4dp"
             app:cardBackgroundColor="@color/red"
-            app:cardCornerRadius="4dp"
+            app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/power_second"
             app:layout_constraintHorizontal_bias="0.666"
