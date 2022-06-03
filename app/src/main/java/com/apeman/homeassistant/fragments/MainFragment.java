@@ -285,24 +285,28 @@ public class MainFragment extends Fragment {
         // TODO: Simplify this
         // Creating new cards
         cardContentArrayList.add(new CardContent(
+                R.drawable.ic_temperature_reader,
                 "Salon",
                 cardValues.get(IN_TEMP),
                 "Czujnik temperatury wew."
         ));
 
         cardContentArrayList.add(new CardContent(
+                R.drawable.ic_humidity,
                 "Dom",
                 cardValues.get(IN_HUM),
                 "Wilgotność"
         ));
 
         cardContentArrayList.add(new CardContent(
+                R.drawable.ic_sensor,
                 "Drzwi w biurze",
                 cardValues.get(DOOR_STATUS),
                 "Czujnik otwarcia drzwi"
         ));
 
         cardContentArrayList.add(new CardContent(
+                R.drawable.ic_sensor,
                 "Okno w biurze",
                 cardValues.get(WINDOW_STATUS),
                 "Czujnik otwarcia okna"
