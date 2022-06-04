@@ -54,12 +54,27 @@ public interface BlynkService {
     );
 
     /**
-     * Updates relay status on Blynk platform. Used with OkHttpClient to append virtual pins
+     * Updates first relay status on Blynk platform.
      * @param token Blynk.cloud token
+     * @param mode Sets relay to powered on (1) or powered off (0)
      * @return Observable<BlynkRelayStatus>
      */
     @GET("update")
-    Observable<BlynkRelayStatus> updateRelayStatus(
-            @Query("token") String token
+    Observable<BlynkRelayStatus> updateFirstRelay(
+            @Query("token") String token,
+            @Query("V4") int mode
      );
+
+
+    /**
+     * Updates second relay status on Blynk platform.
+     * @param token Blynk.cloud token
+     * @param mode Sets relay to powered on (1) or powered off (0)
+     * @return Observable<BlynkRelayStatus>
+     */
+    @GET("update")
+    Observable<BlynkRelayStatus> updateSecondRelay(
+            @Query("token") String token,
+            @Query("V5") int mode
+    );
 }
