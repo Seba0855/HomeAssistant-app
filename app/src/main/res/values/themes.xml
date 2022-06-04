@@ -6,7 +6,7 @@
         <item name="colorPrimaryVariant">@color/background_white</item>
         <item name="colorOnPrimary">@color/dark_gray</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/light_gray</item>
+        <item name="colorSecondary">#148E13</item>
         <item name="colorSecondaryVariant">@color/dark_gray</item>
         <item name="colorOnSecondary">@color/light_gray</item>
         <!-- Status bar color. -->
@@ -20,5 +20,7 @@
         <item name="iconEndPadding">24dp</item>
     </style>
 
-
+<!--    <style name="SwitchStyle" parent="Widget.MaterialComponents.CompoundButton.Switch">-->
+<!--        <item name="">@color/light_green</item>-->
+<!--    </style>-->
 </resources>

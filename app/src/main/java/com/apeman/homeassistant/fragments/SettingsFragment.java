@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 
 import com.apeman.homeassistant.MainActivity;
 import com.apeman.homeassistant.R;
+import com.google.android.material.transition.MaterialFadeThrough;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,6 +56,8 @@ public class SettingsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        setExitTransition(new MaterialFadeThrough());
+        setEnterTransition(new MaterialFadeThrough());
 
         ((MainActivity) requireActivity()).disableNavigationTooltips();
     }

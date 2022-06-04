@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 
 import com.apeman.homeassistant.MainActivity;
 import com.apeman.homeassistant.R;
+import com.google.android.material.transition.MaterialFadeThrough;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,6 +58,9 @@ public class ChartFragment extends Fragment {
         }
 
         ((MainActivity) requireActivity()).disableNavigationTooltips();
+        setExitTransition(new MaterialFadeThrough());
+        setEnterTransition(new MaterialFadeThrough());
+
     }
 
     @Override

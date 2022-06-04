@@ -1,6 +1,10 @@
 package com.apeman.homeassistant;
 
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -41,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
-
     /**
      * Fragment selector - it allows user to switch
      * between fragments available on bottom navigation view.
@@ -59,12 +62,6 @@ public class MainActivity extends AppCompatActivity {
         // Switch fragment to selected above
         getSupportFragmentManager()
                 .beginTransaction()
-                .setCustomAnimations(
-                        R.anim.slide_in, // enter
-                        R.anim.fade_out,
-                        R.anim.fade_in,
-                        R.anim.slide_in
-                )
                 .replace(R.id.fragment_container, active)
                 .commit();
         return true;

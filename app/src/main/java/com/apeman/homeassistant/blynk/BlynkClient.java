@@ -3,6 +3,7 @@ package com.apeman.homeassistant.blynk;
 import androidx.annotation.NonNull;
 
 import io.reactivex.rxjava3.core.Observable;
+import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -38,4 +39,17 @@ public class BlynkClient {
     public Observable<BlynkDoorStatus> getDoorStatus(@NonNull String token) {
         return blynkService.getDoorStatus(token, "", "");
     }
+
+    public Observable<BlynkRelayStatus> getRelayStatus(@NonNull String token) {
+        return blynkService.getRelayStatus(token, "", "");
+    }
+
+    public Call<Void> updateFirstRelay(@NonNull String token, int mode) {
+        return blynkService.updateFirstRelay(token, mode);
+    }
+
+    public Call<Void> updateSecondRelay(@NonNull String token, int mode) {
+        return blynkService.updateSecondRelay(token, mode);
+    }
+
 }

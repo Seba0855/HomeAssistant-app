@@ -5,7 +5,7 @@ X
 Napp/src/androidTest/java/com/apeman/homeassistant/ExampleInstrumentedTest.java,a\f\af80a52855417f510c9b38aeec1455935e8b9a57
 o
 ?app/src/test/java/com/apeman/homeassistant/ExampleUnitTest.java,e\5\e509293e943e56b1cb0f2a9b2bb3fa5f55898f1b
+@
+app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
 <
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
-z
-Japp/src/main/java/com/apeman/homeassistant/fragments/SettingsFragment.java,0\1\0185b637d61d3a4a55c1460a3cf81bd52773eb93

@@ -1,6 +1,7 @@
 package com.apeman.homeassistant.blynk;
 
 import io.reactivex.rxjava3.core.Observable;
+import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -36,5 +37,44 @@ public interface BlynkService {
             @Query("token") String token,
             @Query("V2") String a,
             @Query("V3") String b
+    );
+
+    /**
+     * Gets relay status - used to inform user if device is powered on or off
+     * @param token Blynk.cloud token
+     * @param a additional parameter, should be always null
+     * @param b additional parameter, should be always null
+     * @return Observable<BlynkRelayStatus>
+     */
+    @GET("get")
+    Observable<BlynkRelayStatus> getRelayStatus(
+            @Query("token") String token,
+            @Query("V4") String a,
+            @Query("V5") String b
+    );
+
+    /**
+     * Updates first relay status on Blynk platform.
+     * @param token Blynk.cloud token
+     * @param mode Sets relay to powered on (1) or powered off (0)
+     * @return Observable<BlynkRelayStatus>
+     */
+    @GET("update")
+    Call<Void> updateFirstRelay(
+            @Query("token") String token,
+            @Query("V4") int mode
+     );
+
+
+    /**
+     * Updates second relay status on Blynk platform.
+     * @param token Blynk.cloud token
+     * @param mode Sets relay to powered on (1) or powered off (0)
+     * @return Observable<BlynkRelayStatus>
+     */
+    @GET("update")
+    Call<Void> updateSecondRelay(
+            @Query("token") String token,
+            @Query("V5") int mode
     );
 }
