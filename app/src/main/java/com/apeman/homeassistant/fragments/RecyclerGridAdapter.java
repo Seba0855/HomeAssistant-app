@@ -126,6 +126,14 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             powerSecond = itemView.findViewById(R.id.power_second);
             powerFirstIndicator = itemView.findViewById(R.id.power_first_indicator);
             powerSecondIndicator = itemView.findViewById(R.id.power_second_indicator);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // TODO: Display options box
+
+                }
+            });
         }
     }
 

@@ -6,8 +6,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="8dp"
     app:cardElevation="2dp"
+    android:clickable="true"
     app:cardUseCompatPadding="true"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:focusable="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
