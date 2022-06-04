@@ -1,7 +1,10 @@
 package com.apeman.homeassistant.fragments;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.graphics.Rect;
+import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -16,6 +19,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.apeman.homeassistant.CardContent;
@@ -24,6 +29,10 @@ import com.apeman.homeassistant.blynk.BlynkClient;
 import com.apeman.homeassistant.blynk.BlynkRelayStatus;
 import com.apeman.homeassistant.blynk.BlynkService;
 import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.android.material.transition.MaterialArcMotion;
+import com.google.android.material.transition.platform.MaterialContainerTransform;
+import com.google.android.material.transition.platform.MaterialFade;
+import com.google.android.material.transition.platform.MaterialFadeThrough;
 
 import java.util.ArrayList;
 
@@ -123,8 +132,11 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         // Creating popup window
                         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
                         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-                        boolean focusable = true;
-                        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+                        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
+
+
+                        popupWindow.setEnterTransition(new MaterialFadeThrough());
+                        popupWindow.setExitTransition(new MaterialFadeThrough().setDuration(500));
 
                         // Showing the popup window
                         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);

@@ -2,13 +2,15 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="175dp"
     android:layout_height="175dp"
+    android:id="@+id/start_view"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="8dp"
     app:cardElevation="2dp"
     android:clickable="true"
     app:cardUseCompatPadding="true"
     android:layout_gravity="center"
-    android:focusable="true">
+    android:focusable="true"
+    android:transitionName="shared_element_container">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

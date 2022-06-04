@@ -2,10 +2,12 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:id="@+id/end_view"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardBackgroundColor="#DBDBDB"
     android:alpha="0.8"
-    app:cardCornerRadius="16dp">
+    app:cardCornerRadius="16dp"
+    android:transitionName="shared_element_container">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -30,6 +32,7 @@
                 android:id="@+id/relay1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:useMaterialThemeColors="false"
                 android:text="Relay 1"/>
 
             <com.google.android.material.switchmaterial.SwitchMaterial

@@ -23,6 +23,7 @@ import com.apeman.homeassistant.blynk.BlynkDoorStatus;
 import com.apeman.homeassistant.blynk.BlynkRelayStatus;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.android.material.transition.MaterialFadeThrough;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -64,6 +65,9 @@ public class MainFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         cardContentArrayList = new ArrayList<>();
+        setExitTransition(new MaterialFadeThrough());
+        setEnterTransition(new MaterialFadeThrough());
+
         // Get data from sensors
         getData();
         getDoorStatus();
