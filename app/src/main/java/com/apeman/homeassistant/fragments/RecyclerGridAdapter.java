@@ -98,7 +98,10 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 relayHolder.powerSecondLabel.setText(cardContent.getPowerSecondLabel());
 
                 relayHolder.powerFirstIndicator.setBackgroundResource(cardContent.getFirstIndicatorColor());
+                Log.d("ViewHolder", "Color: " + cardContent.getFirstIndicatorColor());
                 relayHolder.powerSecondIndicator.setBackgroundResource(cardContent.getSecondIndicatorColor());
+                Log.d("ViewHolder", "Color: " + cardContent.getSecondIndicatorColor());
+
 
 
                 relayHolder.relayIcon.setImageResource(cardContent.getIcon());
@@ -114,6 +117,8 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                         SwitchMaterial relay1 = popupView.findViewById(R.id.relay1);
                         SwitchMaterial relay2 = popupView.findViewById(R.id.relay2);
+                        relay1.setChecked(cardContent.getPowerFirstStatus());
+                        relay2.setChecked(cardContent.getPowerSecondStatus());
 
                         // Creating popup window
                         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
@@ -134,6 +139,8 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                                     cardContent.setPowerFirstStatus(relayPowered);
                                     int mode = relayPowered ? 1 : 0;
 
+                                    relay1.setChecked(relayPowered);
+
                                     Call<Void> call = BlynkClient.getInstance().updateFirstRelay(token, mode);
                                     call.enqueue(new Callback<Void>() {
                                         @Override
@@ -144,6 +151,7 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                                             } else {
                                                 cardContent.setFirstIndicatorColor(R.color.red);
                                             }
+                                            notifyItemChanged(4);
                                         }
 
                                         @Override
@@ -162,6 +170,8 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                                     cardContent.setPowerSecondStatus(relayPowered);
                                     int mode = relayPowered ? 1 : 0;
 
+                                    relay2.setChecked(relayPowered);
+
                                     Call<Void> call = BlynkClient.getInstance().updateSecondRelay(token, mode);
                                     call.enqueue(new Callback<Void>() {
                                         @Override
@@ -172,6 +182,7 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                                             } else {
                                                 cardContent.setSecondIndicatorColor(R.color.red);
                                             }
+                                            notifyItemChanged(4);
                                         }
 
                                         @Override

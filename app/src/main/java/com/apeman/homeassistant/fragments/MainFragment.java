@@ -278,7 +278,7 @@ public class MainFragment extends Fragment {
                     @Override
                     public void onComplete() {
                         Log.d(TAG, "Relay onComplete()");
-                        adapter.notifyItemChanged(5);
+                        adapter.notifyItemChanged(4);
                     }
                 });
     }
@@ -413,8 +413,6 @@ public class MainFragment extends Fragment {
         cardContentArrayList.get(0).setLineColor(R.color.orange);
         cardContentArrayList.get(1).setLineColor(R.color.light_blue);
 
-        // Set default indicators for relays
-        cardContentArrayList.get(4).setFirstIndicatorColor(R.color.light_green);
-        cardContentArrayList.get(4).setSecondIndicatorColor(R.color.red);
+        setRelayIndicators(0, 0);
     }
 }
