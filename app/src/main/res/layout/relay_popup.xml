@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/end_view"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardBackgroundColor="#DBDBDB"
-    android:alpha="0.8"
+    android:alpha="0.90"
     app:cardCornerRadius="16dp"
     android:transitionName="shared_element_container">
 
@@ -20,27 +21,64 @@
             android:layout_centerInParent="true"
             android:layout_margin="30dp"
             android:textSize="22sp"
-            android:text="Zasilanie"/>
+            android:layout_gravity="center"
+            android:text="Zasilanie"
+            android:textColor="@color/dark_gray"/>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="30dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_margin="25dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/relay1_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/dark_gray"
+                app:layout_constraintEnd_toStartOf="@+id/relay1"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/relay1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:useMaterialThemeColors="false"
-                android:text="Relay 1"/>
+                android:layout_marginTop="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:useMaterialThemeColors="false" />
+
+            <TextView
+                android:id="@+id/relay2_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="19dp"
+                android:textColor="@color/dark_gray"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/relay2"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/relay1_label"
+                app:layout_constraintVertical_bias="0.212" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/relay2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Relay 2"/>
-        </LinearLayout>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/relay1"
+                app:layout_constraintVertical_bias="0.0" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </LinearLayout>
 
 

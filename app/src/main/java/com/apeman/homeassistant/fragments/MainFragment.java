@@ -1,12 +1,16 @@
 package com.apeman.homeassistant.fragments;
 
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -65,9 +69,6 @@ public class MainFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         cardContentArrayList = new ArrayList<>();
-        setExitTransition(new MaterialFadeThrough());
-        setEnterTransition(new MaterialFadeThrough());
-
         // Get data from sensors
         getData();
         getDoorStatus();
@@ -78,6 +79,9 @@ public class MainFragment extends Fragment {
 
         // Some debug values
         debugValues();
+
+        setExitTransition(new MaterialFadeThrough());
+        setEnterTransition(new MaterialFadeThrough());
     }
 
     @Override
@@ -88,6 +92,7 @@ public class MainFragment extends Fragment {
 
         // Setting the RecyclerView and app bar
         RecyclerView recyclerView = view.findViewById(R.id.cardsDeck);
+
         MaterialToolbar topAppBar = new MaterialToolbar(view.findViewById(R.id.topAppBar).getContext());
 
         // Setting MaterialToolbar to be support action bar

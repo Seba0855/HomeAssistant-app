@@ -44,7 +44,7 @@ import retrofit2.Retrofit;
 public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private ArrayList<CardContent> cardContentArrayList;
     private Context context;
-    private final String token = "d-6DGP7qHZ3ILwCWh3PUJNnI8LScfhqs";
+    private static final String TOKEN = "d-6DGP7qHZ3ILwCWh3PUJNnI8LScfhqs";
 
     public RecyclerGridAdapter(ArrayList<CardContent> recyclerCardContent, Context context) {
         this.cardContentArrayList = recyclerCardContent;
@@ -118,14 +118,22 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 relayHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        // TODO: Display options box
                         LayoutInflater inflater = (LayoutInflater) view.getContext()
                                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
                         View popupView = inflater.inflate(R.layout.relay_popup, null);
 
+                        // popupView elements
                         SwitchMaterial relay1 = popupView.findViewById(R.id.relay1);
                         SwitchMaterial relay2 = popupView.findViewById(R.id.relay2);
+                        TextView rFirstLabel = popupView.findViewById(R.id.relay1_label);
+                        TextView rSecondLabel = popupView.findViewById(R.id.relay2_label);
+
+                        // Set the same text as shown in card
+                        rFirstLabel.setText(relayHolder.powerFirstLabel.getText());
+                        rSecondLabel.setText(relayHolder.powerSecondLabel.getText());
+
+                        // Maintain switch status
                         relay1.setChecked(cardContent.getPowerFirstStatus());
                         relay2.setChecked(cardContent.getPowerSecondStatus());
 
@@ -134,7 +142,7 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
                         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
 
-
+                        // Setting transitions for popup window
                         popupWindow.setEnterTransition(new MaterialFadeThrough());
                         popupWindow.setExitTransition(new MaterialFadeThrough().setDuration(500));
 
@@ -144,7 +152,7 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         if (popupView.getVisibility() == View.VISIBLE) {
                             Log.e("onClick relayHolder", "popup visible");
 
-
+                            // Changing relay state on Blynk cloud
                             relay1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                                 @Override
                                 public void onCheckedChanged(CompoundButton compoundButton, boolean relayPowered) {
@@ -153,11 +161,13 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                                     relay1.setChecked(relayPowered);
 
-                                    Call<Void> call = BlynkClient.getInstance().updateFirstRelay(token, mode);
+                                    Call<Void> call = BlynkClient.getInstance().updateFirstRelay(TOKEN, mode);
                                     call.enqueue(new Callback<Void>() {
                                         @Override
                                         public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                                             Log.d("updateRelays", "VirtualPin value for relay 1 successfully updated");
+
+                                            // Updating indicator colors
                                             if (mode == 1) {
                                                 cardContent.setFirstIndicatorColor(R.color.light_green);
                                             } else {
@@ -184,7 +194,7 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                                     relay2.setChecked(relayPowered);
 
-                                    Call<Void> call = BlynkClient.getInstance().updateSecondRelay(token, mode);
+                                    Call<Void> call = BlynkClient.getInstance().updateSecondRelay(TOKEN, mode);
                                     call.enqueue(new Callback<Void>() {
                                         @Override
                                         public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
@@ -207,11 +217,10 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             });
                         }
 
-
                         popupView.setOnTouchListener(new View.OnTouchListener() {
                             @Override
                             public boolean onTouch(View view, MotionEvent motionEvent) {
-//                                view.performClick();
+                                view.performClick();
                                 popupWindow.dismiss();
                                 return true;
                             }
