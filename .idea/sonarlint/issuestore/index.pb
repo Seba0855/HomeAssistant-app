@@ -13,5 +13,3 @@ w
 Gapp/src/main/java/com/apeman/homeassistant/fragments/ChartFragment.java,7\3\735aa3314cdec340535aee231da44efa8ed38f05
 <
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
-k
-;app/src/main/java/com/apeman/homeassistant/CardContent.java,c\6\c6e263a3df600ec45e2dbf851b13d5b4137777a3

@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,10 +20,11 @@ import com.apeman.homeassistant.R;
 import com.apeman.homeassistant.blynk.BlynkClient;
 import com.apeman.homeassistant.blynk.BlynkData;
 import com.apeman.homeassistant.blynk.BlynkDoorStatus;
+import com.apeman.homeassistant.blynk.BlynkRelayStatus;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +34,9 @@ import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +67,7 @@ public class MainFragment extends Fragment {
         // Get data from sensors
         getData();
         getDoorStatus();
+        getRelayStatus();
 
         // Main content
         createCardViews();
@@ -103,6 +110,7 @@ public class MainFragment extends Fragment {
             refresh.animate().rotation(360.0f).setDuration(200).start();
             getData();
             getDoorStatus();
+            getRelayStatus();
         });
 
         return view;
@@ -239,6 +247,60 @@ public class MainFragment extends Fragment {
                 });
     }
 
+    private void getRelayStatus() {
+        String token = getResources().getString(R.string.blynk_token);
+
+        BlynkClient.getInstance()
+                .getRelayStatus(token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<BlynkRelayStatus>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        Log.d(TAG, "onSubscribe() BlynkRelayStatus invoked");
+                    }
+
+                    @Override
+                    public void onNext(@NonNull BlynkRelayStatus blynkRelayStatus) {
+                        int relayFirstStatus = blynkRelayStatus.getFirstDeviceStatus();
+                        int relaySecondStatus = blynkRelayStatus.getSecondDeviceStatus();
+
+
+                        setRelayIndicators(relayFirstStatus, relaySecondStatus);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e(TAG, "BlynkRelayStatus error");
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d(TAG, "Relay onComplete()");
+                        adapter.notifyItemChanged(5);
+                    }
+                });
+    }
+
+    private void setRelayIndicators(int first, int second) {
+        if (first == 1) {
+            cardContentArrayList.get(4).setPowerFirstStatus(true);
+            cardContentArrayList.get(4).setFirstIndicatorColor(R.color.light_green);
+        } else if (first == 0) {
+            cardContentArrayList.get(4).setPowerFirstStatus(false);
+            cardContentArrayList.get(4).setFirstIndicatorColor(R.color.red);
+        }
+
+        if (second == 1) {
+            cardContentArrayList.get(4).setPowerSecondStatus(true);
+            cardContentArrayList.get(4).setSecondIndicatorColor(R.color.light_green);
+        } else if (second == 0) {
+            cardContentArrayList.get(4).setPowerSecondStatus(false);
+            cardContentArrayList.get(4).setSecondIndicatorColor(R.color.red);
+        }
+    }
+
     private void setObjectStatus(String object, int id, String status) {
         if (status.equals("Open")) {
             cardValues.put(object, "Open");
@@ -268,7 +330,6 @@ public class MainFragment extends Fragment {
             cardContentArrayList.get(i).setValue(cardValues.get(indexes.get(i)));
             adapter.notifyItemChanged(i);
         }
-
     }
 
     /**

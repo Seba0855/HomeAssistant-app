@@ -1,7 +1,7 @@
 package com.apeman.homeassistant.blynk;
 
 import io.reactivex.rxjava3.core.Observable;
-import retrofit2.http.Field;
+import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -60,7 +60,7 @@ public interface BlynkService {
      * @return Observable<BlynkRelayStatus>
      */
     @GET("update")
-    Observable<BlynkRelayStatus> updateFirstRelay(
+    Call<Void> updateFirstRelay(
             @Query("token") String token,
             @Query("V4") int mode
      );
@@ -73,7 +73,7 @@ public interface BlynkService {
      * @return Observable<BlynkRelayStatus>
      */
     @GET("update")
-    Observable<BlynkRelayStatus> updateSecondRelay(
+    Call<Void> updateSecondRelay(
             @Query("token") String token,
             @Query("V5") int mode
     );

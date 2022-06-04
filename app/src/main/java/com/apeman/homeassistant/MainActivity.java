@@ -1,6 +1,7 @@
 package com.apeman.homeassistant;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -40,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.fragment_container, active)
                 .commit();
     }
-
 
     /**
      * Fragment selector - it allows user to switch

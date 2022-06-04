@@ -26,11 +26,11 @@ public class BlynkRelayStatus {
         return secondDevice;
     }
 
-    public void setFirstDevice(int firstDevice) {
+    public void setFirstDeviceStatus(int firstDevice) {
         this.firstDevice = firstDevice;
     }
 
-    public void setSecondDevice(int secondDevice) {
+    public void setSecondDeviceStatus(int secondDevice) {
         this.secondDevice = secondDevice;
     }
 

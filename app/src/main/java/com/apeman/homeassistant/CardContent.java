@@ -18,10 +18,12 @@ public class CardContent {
 
     // Relay parameters
     private String relayIndicator;
-    private String powerFirst;
-    private String powerSecond;
+    private String powerFirstLabel;
+    private String powerSecondLabel;
     private int firstIndicatorColor;
     private int secondIndicatorColor;
+    private boolean powerFirstStatus;
+    private boolean powerSecondStatus;
 
     public CardContent(int icon, CardType cardType) {
         // Setting the type of card
@@ -46,8 +48,8 @@ public class CardContent {
     public void setRelayContent(String relayIndicator, String powerFirst, String powerSecond) {
         if (getCardType() == CardType.RELAY) {
             setRelayIndicator(relayIndicator);
-            setPowerFirst(powerFirst);
-            setPowerSecond(powerSecond);
+            setPowerFirstLabel(powerFirst);
+            setPowerSecondLabel(powerSecond);
         }
     }
 
@@ -122,20 +124,20 @@ public class CardContent {
         this.relayIndicator = relayIndicator;
     }
 
-    public String getPowerFirst() {
-        return powerFirst;
+    public String getPowerFirstLabel() {
+        return powerFirstLabel;
     }
 
-    public void setPowerFirst(String powerFirst) {
-        this.powerFirst = powerFirst;
+    public void setPowerFirstLabel(String powerFirstLabel) {
+        this.powerFirstLabel = powerFirstLabel;
     }
 
-    public String getPowerSecond() {
-        return powerSecond;
+    public String getPowerSecondLabel() {
+        return powerSecondLabel;
     }
 
-    public void setPowerSecond(String powerSecond) {
-        this.powerSecond = powerSecond;
+    public void setPowerSecondLabel(String powerSecondLabel) {
+        this.powerSecondLabel = powerSecondLabel;
     }
 
     public int getFirstIndicatorColor() {
@@ -153,4 +155,21 @@ public class CardContent {
     public void setSecondIndicatorColor(int secondIndicatorColor) {
         this.secondIndicatorColor = secondIndicatorColor;
     }
+
+    public boolean getPowerFirstStatus() {
+        return powerFirstStatus;
+    }
+
+    public void setPowerFirstStatus(boolean powerFirstStatus) {
+        this.powerFirstStatus = powerFirstStatus;
+    }
+
+    public boolean getPowerSecondStatus() {
+        return powerSecondStatus;
+    }
+
+    public void setPowerSecondStatus(boolean powerSecondStatus) {
+        this.powerSecondStatus = powerSecondStatus;
+    }
+
 }
