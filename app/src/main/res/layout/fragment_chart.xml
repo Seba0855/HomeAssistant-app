@@ -2,21 +2,110 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="46dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     tools:context=".fragments.ChartFragment">
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Temperatura"
+            android:textColor="#131313"
+            android:textSize="24sp"/>
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_keyboard_arrow_down_24"/>
+    </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:alpha="0.8"
-        android:text="@string/charts_info"
-        android:textAlignment="center"
-        android:textSize="12sp"
-        android:layout_marginTop="350dp"
-        app:drawableTopCompat="@drawable/ic_baseline_code_24" />
+        android:text="2022"
+        android:alpha="0.5"/>
+
+
+    <LinearLayout
+        android:layout_marginTop="33dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Czerwiec"
+            android:textSize="16sp"
+            android:textColor="#131313"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Maj"
+            android:textColor="#131313"
+            android:textSize="16sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kwiecień"
+            android:textSize="16sp"
+            android:textColor="#131313"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Marzec"
+            android:textSize="16sp"
+            android:textColor="#131313"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="17dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <View
+            android:layout_width="30dp"
+            android:layout_height="1dp"
+            android:background="#DBDBDB"/>
+        <View
+            android:layout_width="75dp"
+            android:layout_height="1dp"
+            android:background="#DB405D"/>
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="#DBDBDB"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ajdjsd"
+        android:layout_marginBottom="15dp"/>
+
+
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:alpha="0.8"-->
+<!--        android:text="@string/charts_info"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textSize="12sp"-->
+<!--        android:layout_marginTop="350dp"-->
+<!--        app:drawableTopCompat="@drawable/ic_baseline_code_24" />-->
 
 
 </LinearLayout>
